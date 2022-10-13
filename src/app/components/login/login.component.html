@@ -1,0 +1,43 @@
+<div class="container">
+  <mat-card class="card mat-elevation-z8">
+    <img class="logo" src="../../../assets/img/logo.png" />
+    <h1 class="card-title">Faça login na sua conta</h1>
+    <form class="form">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Digite seu email</mat-label>
+        <input
+          matInput
+          placeholder="email@email.com"
+          [formControl]="email"
+          [(ngModel)]="form.username"
+          name="email"
+          required
+        />
+        <mat-icon matSuffix class="icon">alternate_email</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Digite sua senha</mat-label>
+        <input
+          matInput
+          placeholder="P@ssword123"
+          [formControl]="password"
+          [(ngModel)]="form.password"
+          name="password"
+          type="password"
+          required
+        />
+        <mat-icon matSuffix class="icon">lock</mat-icon>
+      </mat-form-field>
+      <button mat-raised-button
+        [disabled]="!validFields()"
+        (click)="login()"
+        class="form-button">
+        Login
+      </button>
+      <a routerLink="/user/create"
+        ><h3 class="form-new-account">Crie sua conta</h3>
+      </a>
+    </form>
+  </mat-card>
+  <app-footer></app-footer>
+</div>

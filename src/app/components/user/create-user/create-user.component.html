@@ -1,0 +1,62 @@
+<div class="container">
+  <mat-card class="card mat-elevation-z8">
+    <img class="logo" src="../../../assets/img/logo.png" />
+    <h1 class="card-title">Crie sua conta</h1>
+    <form class="form">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Digite seu nome</mat-label>
+        <input
+          matInput
+          placeholder="Fulano da Silva"
+          [formControl]="name"
+          [(ngModel)]="form.name"
+          name="name"
+          required
+        />
+        <mat-icon matSuffix class="icon">person</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Digite seu email</mat-label>
+        <input
+          matInput
+          placeholder="email@email.com"
+          [formControl]="email"
+          [(ngModel)]="form.email"
+          name="email"
+          required
+        />
+        <mat-icon matSuffix class="icon">alternate_email</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Digite sua senha</mat-label>
+        <input
+          matInput
+          placeholder="P@ssword123"
+          [formControl]="password"
+          [(ngModel)]="form.password"
+          name="password"
+          type="password"
+          required
+        />
+        <mat-icon matSuffix class="icon">lock</mat-icon>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        [disabled]="!validFields()"
+        (click)="create()"
+        class="form-button"
+      >
+        Criar
+      </button>
+      <button
+        mat-stroked-button
+        class="form-button-cancelar"
+        color="warn"
+        routerLink="/login"
+      >
+        Cancelar
+      </button>
+    </form>
+  </mat-card>
+  <app-footer></app-footer>
+</div>

@@ -1,0 +1,61 @@
+<div class="container">
+  <h1 class="title">DISPOSITIVOS ANALÓGICOS</h1>
+  <div class="content">
+    <div class="header-buttons">
+      <button mat-raised-button (click)="create()" class="button-create">
+        <mat-icon>add_box</mat-icon>Add
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="deleteAll()"
+        class="button-delete-all"
+      >
+      <mat-icon>delete_forever</mat-icon>
+        All
+      </button>
+    </div>
+    <div class="devices">
+      <mat-card *ngFor="let device of devices" class="device-card mat-elevation-z4">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Icon-button with a menu" class="device-card-menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="updateById(device.id)">
+            <mat-icon>edit</mat-icon>
+            <span>Editar</span>
+          </button>
+          <button mat-menu-item (click)="deleteById(device.id)">
+            <mat-icon>delete_forever</mat-icon>
+            <span>Deletar</span>
+          </button>
+        </mat-menu>
+        <h5 class="device-card-text-key">Nome:</h5>
+        <h3 class="device-card-text-value">{{device.name}}</h3>
+        <h5 class="device-card-text-key">Localização:</h5>
+        <h3 class="device-card-text-value">{{device.location}}</h3>
+        <h5 class="device-card-text-key">ID:</h5>
+        <h3 class="device-card-text-value">{{device.id}}</h3>
+        <h5 class="device-card-text-key">Output</h5>
+        <h1 class="device-card-output">{{device.output}}</h1>
+        <mat-slider
+        class="device-card-slider"
+        [disabled]="disabled"
+        [invert]="invert"
+        [max]="max"
+        [min]="min"
+        [step]="step"
+        [thumbLabel]="thumbLabel"
+        [tickInterval]="getSliderTickInterval()"
+        [(ngModel)]="device.output"
+        [vertical]="vertical"
+        aria-labelledby="name-label"
+        (change)="updateOutput(device.id, device.output)"
+        >
+    </mat-slider>
+
+      </mat-card>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>
