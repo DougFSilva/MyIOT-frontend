@@ -26,14 +26,14 @@
   color: darkslateblue;
 }
 
-.form-button {
+.form-button-create {
   width: 100%;
   margin-top: 1rem;
   background-color: darkslateblue;
   color: white;
 }
 
-.form-button-cancelar {
+.form-button-cancel {
   width: 100%;
   margin-top: .5rem;
 }

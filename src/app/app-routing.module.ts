@@ -1,3 +1,4 @@
+import { MeasuringDeviceResolver } from './components/devices/measuring-devices/measuring-device.resolver';
 import { DiscreteDeviceResolver } from './components/devices/discrete-devices/discrete-device.resolver';
 import { AnalogOutputDeviceResolver } from './components/devices/analog-output-devices/analog-output-device.resolver';
 import { UserComponent } from './components/user/user.component';
@@ -87,7 +88,8 @@ const routes: Routes = [
       },
       {
         path: 'measuring-device/all',
-        component: MeasuringDevicesComponent
+        component: MeasuringDevicesComponent,
+        resolve: {devices: MeasuringDeviceResolver}
       },
       {
         path: 'measuring-device/:id',

@@ -26,20 +26,10 @@
         />
         <mat-icon matSuffix class="icon">short_text</mat-icon>
       </mat-form-field>
-      <button
-        mat-raised-button
-        [disabled]="!validFields()"
-        (click)="create()"
-        class="form-button"
-      >
+      <button mat-raised-button [disabled]="!validFields()" (click)="create()" class="form-button-create">
         Criar
       </button>
-      <button
-        mat-stroked-button
-        class="form-button-cancelar"
-        color="warn"
-        mat-dialog-close="false"
-      >
+      <button mat-stroked-button class="form-button-cancel" color="warn" mat-dialog-close="false">
         Cancelar
       </button>
     </form>
