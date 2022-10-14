@@ -1,6 +1,7 @@
+import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 
@@ -9,16 +10,26 @@ import { AnalogOutputDevice } from 'src/app/models/AnalogOutputDevice';
 import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 import { CreateAnalogOutputDeviceComponent } from 'src/app/components/devices/analog-output-devices/create-analog-output-device/create-analog-output-device.component';
 import { UpdateAnalogOutputDeviceComponent } from './update-analog-output-device/update-analog-output-device.component';
+import { API_CONFIG } from 'src/app/config/API_CONFIG';
 
 @Component({
   selector: 'app-analog-output-devices',
   templateUrl: './analog-output-devices.component.html',
   styleUrls: ['./analog-output-devices.component.css'],
 })
-export class AnalogOutputDevicesComponent implements OnInit {
+export class AnalogOutputDevicesComponent implements OnInit, OnDestroy {
   devices: AnalogOutputDevice[] = [];
-  private stompClient;
-  public websocketComponent: AnalogOutputDevicesComponent;
+  deviceUpdated: AnalogOutputDevice = {
+    id: "",
+    userId: "",
+    location: "",
+    name: "",
+    output: 0
+  }
+  output: number = 0;
+  public stompClient;
+
+  //Slider properties
   autoTicks = false;
   disabled = false;
   invert = false;
@@ -26,30 +37,45 @@ export class AnalogOutputDevicesComponent implements OnInit {
   min = 0;
   showTicks = false;
   step = 1;
-  thumbLabel = false;
+  thumbLabel = true;
   vertical = false;
   tickInterval = 1;
 
   constructor(
     private service: AnalogOutputDeviceService,
     private toast: ToastrService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private route : ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.findDevices();
+    this.devices = this.route.snapshot.data["devices"]
+    this.webSocketConnect()
   }
 
-  connect() {
-    const socket = new SockJS('http://localhost:8080/myiot-websocket/?token=' + localStorage.getItem("token"));
+  ngOnDestroy() : void {
+    this.webSocketDisconnect()
+  }
+
+  webSocketConnect(): void {
+   if(!this.stompClient){
+    const socket = new SockJS(`${API_CONFIG.baseUrl}/myiot-websocket/?token=` + localStorage.getItem("token"));
     this.stompClient = Stomp.over(socket);
-    const _this = this;
+    const that = this;
     this.stompClient.connect({}, function (frame) {
-      console.log('Connected: ' + frame);
-      _this.stompClient.subscribe('/user/queue/message', function (hello) {
-        _this.addMessages(JSON.parse(hello.body).payload);
+      that.stompClient.subscribe('/user/queue/message/analog-output-device', function (message) {
+        that.deviceUpdated = JSON.parse(message.body);
+        const index = that.devices.map(device => device.id).indexOf(that.deviceUpdated.id)
+        that.devices[index] = that.deviceUpdated
       });
     });
+   }
+  }
+
+  webSocketDisconnect(): void {
+    if (this.stompClient != null) {
+      this.stompClient.disconnect();
+    }
   }
 
   findDevices(): void {
@@ -64,7 +90,10 @@ export class AnalogOutputDevicesComponent implements OnInit {
   }
 
   create(): void {
-    this.dialog.open(CreateAnalogOutputDeviceComponent);
+    let dialog = this.dialog.open(CreateAnalogOutputDeviceComponent);
+    dialog.afterClosed().subscribe( response => {
+      this.findDevices()
+    })
   }
 
   deleteAll(): void {
@@ -80,13 +109,12 @@ export class AnalogOutputDevicesComponent implements OnInit {
             this.toast.error(ex.error.error, 'ERROR');
           }
         );
-      } else {
-        return;
       }
+        return;
     });
   }
 
-  deleteById(id: string) {
+  deleteById(id: string): void {
     let dialog = this.dialog.open(ConfirmDialogComponent);
     dialog.afterClosed().subscribe((response) => {
       if (response == 'true') {
@@ -99,17 +127,17 @@ export class AnalogOutputDevicesComponent implements OnInit {
             this.toast.error(ex.error.error, 'ERROR');
           }
         );
-      } else {
-        return;
       }
+        return;
     });
   }
 
-  updateById(id: string) {
-    this.dialog.open(UpdateAnalogOutputDeviceComponent, {data:{id:id}})
+  updateById(id: string): void {
+    let dialog = this.dialog.open(UpdateAnalogOutputDeviceComponent, {data:{id}})
+    dialog.afterClosed().subscribe(response => {
+      this.findDevices()
+    })
   }
-
-
 
   getSliderTickInterval(): number | 'auto' {
     if (this.showTicks) {

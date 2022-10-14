@@ -1,1 +1,12 @@
-<p>user works!</p>
+
+
+
+
+<h3>{{user.id}}</h3>
+<h3>{{user.email}}</h3>
+<h3>{{user.name}}</h3>
+<h3>{{user.clientMqttPassword}}</h3>
+<h3 *ngFor="let profile of user.profiles">{{profile.type}}</h3>
+
+
+

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_CONFIG } from '../config/API_CONFIG';
 import { DiscreteDevice } from '../models/DiscreteDevice';
-import { DiscreteDeviceForm } from '../models/DiscreteDeviceForm';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,7 @@ export class DiscreteDeviceService {
 
   constructor(private http: HttpClient) { }
 
-  create(form: DiscreteDeviceForm):Observable<DiscreteDevice> {
+  create(form: DiscreteDevice):Observable<DiscreteDevice> {
     return this.http.post<DiscreteDevice>(`${API_CONFIG.baseUrl}/discrete-device`, form)
   }
 
@@ -24,7 +23,7 @@ export class DiscreteDeviceService {
     return this.http.delete(`${API_CONFIG.baseUrl}/discrete-device/all`)
   }
 
-  updateById(id: string, form : DiscreteDeviceForm): Observable<DiscreteDevice> {
+  updateById(id: string, form : DiscreteDevice): Observable<DiscreteDevice> {
     return this.http.put<DiscreteDevice>(`${API_CONFIG.baseUrl}/discrete-device/id=${id}`, form)
   }
 

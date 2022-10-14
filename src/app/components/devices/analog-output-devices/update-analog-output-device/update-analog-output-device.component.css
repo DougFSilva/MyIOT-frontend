@@ -1,0 +1,46 @@
+.container {
+  width: 25rem;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.card-title {
+  margin-top: 1rem;
+  color: darkslateblue;
+  text-align: center;
+}
+
+.form {
+  width: 90%;
+  margin: auto;
+  padding: 1rem;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.icon {
+  color: darkslateblue;
+}
+
+.form-button {
+  width: 100%;
+  margin-top: 1rem;
+  background-color: darkslateblue;
+  color: white;
+}
+
+.form-button-cancelar {
+  width: 100%;
+  margin-top: .5rem;
+}
+
+@media only screen and (max-width:768px) {
+  .container {
+    width: 100%;
+  }
+
+}

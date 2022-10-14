@@ -39,6 +39,7 @@ import { CreateUserComponent } from './components/user/create-user/create-user.c
 import { UpdateUserComponent } from './components/user/update-user/update-user.component';
 import { UserComponent } from './components/user/user.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     MatListModule,
     MatDialogModule,
     MatSliderModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDividerModule,
   ],
   providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]

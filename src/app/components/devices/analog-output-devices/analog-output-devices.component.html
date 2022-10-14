@@ -1,60 +1,85 @@
 <div class="container">
   <h1 class="title">DISPOSITIVOS ANALÓGICOS</h1>
-  <div class="content">
+  <div class="header">
     <div class="header-buttons">
       <button mat-raised-button (click)="create()" class="button-create">
-        <mat-icon>add_box</mat-icon>Add
+        <mat-icon>add_box</mat-icon>Adicionar
       </button>
-      <button
-        mat-raised-button
-        color="warn"
-        (click)="deleteAll()"
-        class="button-delete-all"
-      >
-      <mat-icon>delete_forever</mat-icon>
-        All
+      <button mat-raised-button color="warn" (click)="deleteAll()" class="button-delete-all">
+        <mat-icon>delete_forever</mat-icon>Todos
+      </button>
+      <button mat-raised-button (click)="findDevices()" class="button-refresh">
+        <mat-icon>refresh</mat-icon>Atualizar
+      </button>
+      <button mat-raised-button (click)="webSocketConnect()" class="button-reconnect">
+        <mat-icon>network_wifi</mat-icon>Conectar
       </button>
     </div>
-    <div class="devices">
-      <mat-card *ngFor="let device of devices" class="device-card mat-elevation-z4">
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Icon-button with a menu" class="device-card-menu">
-          <mat-icon>more_vert</mat-icon>
+    <div class="header-menu">
+      <button mat-raised-button [matMenuTriggerFor]="principalMenu" aria-label="Icon menu" class="button-menu">
+        <mat-icon>menu</mat-icon>Mais
+      </button>
+      <mat-menu #principalMenu="matMenu">
+        <button mat-menu-item (click)="create()">
+          <mat-icon>add_box</mat-icon>
+          <span>Adicionar</span>
         </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="updateById(device.id)">
-            <mat-icon>edit</mat-icon>
-            <span>Editar</span>
-          </button>
-          <button mat-menu-item (click)="deleteById(device.id)">
-            <mat-icon>delete_forever</mat-icon>
-            <span>Deletar</span>
-          </button>
-        </mat-menu>
+        <button mat-menu-item  (click)="deleteAll()">
+          <mat-icon>delete_forever</mat-icon>
+          <span>Deletar todos</span>
+        </button>
+        <button mat-menu-item (click)="findDevices()">
+          <mat-icon>refresh</mat-icon>
+          <span>Atualizar</span>
+        </button>
+        <button mat-menu-item (click)="webSocketConnect()">
+          <mat-icon>network_wifi</mat-icon>
+          <span>Conectar</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  <mat-divider class="divider"></mat-divider>
+  <div class="content">
+    <div *ngFor="let device of devices" class="device-card mat-elevation-z4">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Icon menu" class="device-card-menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="updateById(device.id)">
+          <mat-icon>edit</mat-icon>
+          <span>Editar</span>
+        </button>
+        <button mat-menu-item (click)="deleteById(device.id)">
+          <mat-icon>delete_forever</mat-icon>
+          <span>Deletar</span>
+        </button>
+      </mat-menu>
+      <div class="device-card-content">
         <h5 class="device-card-text-key">Nome:</h5>
-        <h3 class="device-card-text-value">{{device.name}}</h3>
+        <h3 class="device-card-text-value">{{ device.name }}</h3>
         <h5 class="device-card-text-key">Localização:</h5>
-        <h3 class="device-card-text-value">{{device.location}}</h3>
-        <h5 class="device-card-text-key">ID:</h5>
-        <h3 class="device-card-text-value">{{device.id}}</h3>
+        <h3 class="device-card-text-value">{{ device.location }}</h3>
+        <h5 class="device-card-text-key">Tópico Mqtt:</h5>
+        <h3 class="device-card-text-value">iot/AnalogOutputDevice/{{ device.id }}</h3>
         <h5 class="device-card-text-key">Output</h5>
-        <h1 class="device-card-output">{{device.output}}</h1>
+        <h1 class="device-card-output">{{ device.output }}</h1>
         <mat-slider
-        class="device-card-slider"
-        [disabled]="disabled"
-        [invert]="invert"
-        [max]="max"
-        [min]="min"
-        [step]="step"
-        [thumbLabel]="thumbLabel"
-        [tickInterval]="getSliderTickInterval()"
-        [(ngModel)]="device.output"
-        [vertical]="vertical"
-        aria-labelledby="name-label"
-        (change)="updateOutput(device.id, device.output)"
+          class="device-card-slider"
+          [disabled]="disabled"
+          [invert]="invert"
+          [max]="max"
+          [min]="min"
+          [step]="step"
+          [thumbLabel]="thumbLabel"
+          [tickInterval]="getSliderTickInterval()"
+          [(ngModel)]="device.output"
+          [vertical]="vertical"
+          aria-labelledby="name-label"
+          (change)="updateOutput(device.id, device.output)"
         >
-    </mat-slider>
-
-      </mat-card>
+        </mat-slider>
+      </div>
     </div>
   </div>
   <app-footer></app-footer>

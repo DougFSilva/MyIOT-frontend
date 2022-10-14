@@ -3,9 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
-import { ConfirmDialogComponent } from './../../../confirm-dialog/confirm-dialog.component';
-import { AnalogOutputDeviceForm } from './../../../../models/AnalogOutputDeviceForm';
-import { AnalogOutputDeviceService } from './../../../../services/analog-output-device.service';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
+import { AnalogOutputDeviceService } from 'src/app/services/analog-output-device.service';
+import { AnalogOutputDevice } from 'src/app/models/AnalogOutputDevice';
 
 
 @Component({
@@ -15,9 +15,12 @@ import { AnalogOutputDeviceService } from './../../../../services/analog-output-
 })
 export class CreateAnalogOutputDeviceComponent implements OnInit {
 
-  form: AnalogOutputDeviceForm = {
+  form: AnalogOutputDevice = {
+    id: "",
+    userId: "",
     name: "",
-    location: ""
+    location: "",
+    output: 0
   }
 
   name = new FormControl(null, Validators.minLength(3))

@@ -1,5 +1,4 @@
 import { API_CONFIG } from 'src/app/config/API_CONFIG';
-import { MeasuringDeviceForm } from './../models/MeasuringDeviceForm';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -11,7 +10,7 @@ import { MeasuringDevice } from '../models/MeasuringDevice';
 export class MeasuringDeviceService {
   constructor(private http: HttpClient) {}
 
-  create(form : MeasuringDeviceForm):Observable<MeasuringDevice>{
+  create(form : MeasuringDevice):Observable<MeasuringDevice>{
     return this.http.post<MeasuringDevice>(`${API_CONFIG.baseUrl}/measuring-device`, form)
   }
 
@@ -23,7 +22,7 @@ export class MeasuringDeviceService {
     return this.http.delete(`${API_CONFIG.baseUrl}/measuring-device/all`)
   }
 
-  updateById(id : string, form : MeasuringDeviceForm): Observable<MeasuringDevice> {
+  updateById(id : string, form : MeasuringDevice): Observable<MeasuringDevice> {
     return this.http.put<MeasuringDevice>(`${API_CONFIG.baseUrl}/measuring-device/id=${id}`, form)
   }
 

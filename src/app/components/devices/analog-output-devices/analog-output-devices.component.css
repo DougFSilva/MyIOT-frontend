@@ -1,7 +1,12 @@
 .container {
   width: 100%;
-  height: auto;
   background-color: #555;
+}
+
+.header {
+  width: 100%;
+  margin: auto;
+  margin-bottom: 1rem;
 }
 
 .title {
@@ -10,79 +15,103 @@
   text-align: center;
 }
 
-.content {
-  width: 90%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
 .header-buttons {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  width: 100%;
+  width: 90%;
+  margin: auto;
 }
 
 .button-create {
-  width: 5rem;
+  width: 7rem;
   background-color: darkgreen;
   color: white;
   margin-left: .5rem;
 }
 
 .button-delete-all {
-  width: 5rem;
-  margin-left: 1rem;
+  width: 7rem;
+  margin-left: .5rem;
 }
-.devices {
-  width: 100%;
-  margin: 0 auto 3rem auto;
+
+.button-refresh {
+  width: 7rem;
+  margin-left: .5rem;
+  background-color: darkcyan;
+}
+
+.button-reconnect {
+  width: 7rem;
+  margin-left: .5rem;
+  background-color: darkslateblue;
+}
+
+.header-menu {
+  display: none;
+  width: 90%;
+  margin: auto;
+}
+
+.button-menu {
+  width: 5rem;
+  background-color: darkslateblue;
+  color: white;
+}
+
+.content {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 3rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
 }
 
 .device-card {
   width: 15rem;
-  height: 20rem;
+  height: auto;
   margin: .5rem;
+  background-color: white;
+  border-radius: .5rem;
+}
+
+.device-card-content {
+  margin: 1rem;
 }
 
 .device-card-menu {
   float: right;
-  margin-right: -1rem;
+  margin-top: .5rem;
 }
 
 .device-card-text-key {
-  margin: 0;
+  margin: auto;
 }
 
 .device-card-text-value {
   color: darkslateblue;
   font-weight: 500;
+  word-wrap: break-word;
 }
 
 .device-card-slider {
   width: 100%;
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width:900px) {
 
-  .content {
-    width: 100%;
-    margin: auto;
+  .header-buttons {
+    display: none;
   }
 
-  .devices {
-    flex-direction: column;
-    align-items: center;
+  .header-menu {
+    display: block;
   }
 
   .device-card {
-    width: 85%;
+    width: 100%;
+    margin: 1rem 0;
   }
 
 }

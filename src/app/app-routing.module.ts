@@ -1,3 +1,4 @@
+import { AnalogOutputDeviceResolver } from './components/devices/analog-output-devices/analog-output-device.resolver';
 import { UserComponent } from './components/user/user.component';
 
 import { NgModule } from '@angular/core';
@@ -20,6 +21,7 @@ import { MeasuringDevicesComponent } from './components/devices/measuring-device
 import { MeasuringDeviceComponent } from './components/devices/measuring-devices/measuring-device/measuring-device.component';
 import { CreateMeasuringDeviceComponent } from './components/devices/measuring-devices/create-measuring-device/create-measuring-device.component';
 import { UpdateMeasuringDeviceComponent } from './components/devices/measuring-devices/update-measuring-device/update-measuring-device.component';
+import { AuthGuard } from './auth/auth.guard';
 
 
 const routes: Routes = [
@@ -34,7 +36,7 @@ const routes: Routes = [
   {
     path: '',
     component: NavigationComponent,
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'home',
@@ -51,6 +53,9 @@ const routes: Routes = [
       {
         path: 'analog-output-device/all',
         component: AnalogOutputDevicesComponent,
+        resolve: {
+          devices : AnalogOutputDeviceResolver
+        }
       },
       {
         path: 'analog-output-device:/id',
