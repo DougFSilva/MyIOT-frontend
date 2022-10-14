@@ -26,7 +26,6 @@ export class AnalogOutputDevicesComponent implements OnInit, OnDestroy {
     name: "",
     output: 0
   }
-  output: number = 0;
   public stompClient;
 
   //Slider properties
@@ -58,7 +57,10 @@ export class AnalogOutputDevicesComponent implements OnInit, OnDestroy {
   }
 
   webSocketConnect(): void {
-   if(!this.stompClient){
+    if(this.stompClient){
+      this.toast.info("Já conectado!", "INFO")
+      return
+    }
     const socket = new SockJS(`${API_CONFIG.baseUrl}/myiot-websocket/?token=` + localStorage.getItem("token"));
     this.stompClient = Stomp.over(socket);
     const that = this;
@@ -69,7 +71,6 @@ export class AnalogOutputDevicesComponent implements OnInit, OnDestroy {
         that.devices[index] = that.deviceUpdated
       });
     });
-   }
   }
 
   webSocketDisconnect(): void {
@@ -82,9 +83,10 @@ export class AnalogOutputDevicesComponent implements OnInit, OnDestroy {
     this.service.findAllByUser().subscribe(
       (response) => {
         this.devices = response;
+        this.toast.success("Dados atualizados!", "SUCESSO")
       },
       (ex) => {
-        this.toast.error(ex.error.error, 'ERROR');
+        this.toast.error(ex.error.error, 'ERRO');
       }
     );
   }
@@ -106,7 +108,7 @@ export class AnalogOutputDevicesComponent implements OnInit, OnDestroy {
             this.findDevices()
           },
           (ex) => {
-            this.toast.error(ex.error.error, 'ERROR');
+            this.toast.error(ex.error.error, 'ERRO');
           }
         );
       }
@@ -124,7 +126,7 @@ export class AnalogOutputDevicesComponent implements OnInit, OnDestroy {
             this.findDevices()
           },
           (ex) => {
-            this.toast.error(ex.error.error, 'ERROR');
+            this.toast.error(ex.error.error, 'ERRO');
           }
         );
       }
@@ -152,7 +154,7 @@ export class AnalogOutputDevicesComponent implements OnInit, OnDestroy {
         this.toast.success('Comando publicado com sucesso!', 'SUCESSO');
       },
       (ex) => {
-        this.toast.error(ex.error.error, 'ERROR');
+        this.toast.error(ex.error.error, 'ERRO');
       }
     );
   }

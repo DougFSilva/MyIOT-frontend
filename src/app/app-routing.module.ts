@@ -1,3 +1,4 @@
+import { DiscreteDeviceResolver } from './components/devices/discrete-devices/discrete-device.resolver';
 import { AnalogOutputDeviceResolver } from './components/devices/analog-output-devices/analog-output-device.resolver';
 import { UserComponent } from './components/user/user.component';
 
@@ -53,9 +54,7 @@ const routes: Routes = [
       {
         path: 'analog-output-device/all',
         component: AnalogOutputDevicesComponent,
-        resolve: {
-          devices : AnalogOutputDeviceResolver
-        }
+        resolve: {devices : AnalogOutputDeviceResolver}
       },
       {
         path: 'analog-output-device:/id',
@@ -72,6 +71,7 @@ const routes: Routes = [
       {
         path: 'discrete-device/all',
         component: DiscreteDevicesComponent,
+        resolve: {devices: DiscreteDeviceResolver}
       },
       {
         path: 'discrete-device/:id',

@@ -18,6 +18,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'
 
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -89,6 +90,7 @@ import {MatDividerModule} from '@angular/material/divider';
     MatSliderModule,
     MatMenuModule,
     MatDividerModule,
+    MatSlideToggleModule
   ],
   providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]

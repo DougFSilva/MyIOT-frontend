@@ -1,1 +1,37 @@
-<p>create-discrete-device works!</p>
+<div class="container">
+  <div class="card">
+    <h1 class="card-title">Adicionar dispositivo Discreto</h1>
+    <form class="form">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Digite o local de instalação</mat-label>
+        <input
+          matInput
+          placeholder="Sala de estar, cozinha, sala de aula..."
+          [formControl]="location"
+          [(ngModel)]="form.location"
+          name="location"
+          required
+        />
+        <mat-icon matSuffix class="icon">add_location</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Digite o nome do dispositivo</mat-label>
+        <input
+          matInput
+          placeholder="motor, lâmpada..."
+          [formControl]="name"
+          [(ngModel)]="form.name"
+          name="name"
+          required
+        />
+        <mat-icon matSuffix class="icon">short_text</mat-icon>
+      </mat-form-field>
+      <button mat-raised-button [disabled]="!validFields()" (click)="create()" class="form-button">
+        Criar
+      </button>
+      <button mat-stroked-button class="form-button-cancelar" color="warn" mat-dialog-close="false">
+        Cancelar
+      </button>
+    </form>
+  </div>
+</div>

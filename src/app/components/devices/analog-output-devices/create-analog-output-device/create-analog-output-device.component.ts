@@ -42,7 +42,7 @@ export class CreateAnalogOutputDeviceComponent implements OnInit {
           this.toast.success("Dispositivo criado com sucesso!", "SUCESSO")
           this.dialog.closeAll()
         }, (ex) => {
-          this.toast.error(ex.error.error, "ERROR")
+          this.toast.error(ex.error.error, "ERRO")
         })
       }
       return

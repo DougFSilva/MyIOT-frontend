@@ -1,1 +1,37 @@
-<p>update-discrete-device works!</p>
+<div class="container">
+  <div class="card">
+    <h1 class="card-title">Atualizar dispositivo analógico</h1>
+    <form class="form">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Digite o local de instalação</mat-label>
+        <input
+          matInput
+          placeholder="Sala de estar, cozinha, sala de aula..."
+          [formControl]="location"
+          [(ngModel)]="device.location"
+          name="location"
+          required
+        />
+        <mat-icon matSuffix class="icon">add_location</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Digite o nome do dispositivo</mat-label>
+        <input
+          matInput
+          placeholder="motor, lâmpada..."
+          [formControl]="name"
+          [(ngModel)]="device.name"
+          name="name"
+          required
+        />
+        <mat-icon matSuffix class="icon">short_text</mat-icon>
+      </mat-form-field>
+      <button mat-raised-button [disabled]="!validFields()" (click)="update()" class="form-button">
+        Atualizar
+      </button>
+      <button mat-stroked-button class="form-button-cancelar" color="warn" mat-dialog-close="false">
+        Cancelar
+      </button>
+    </form>
+  </div>
+</div>

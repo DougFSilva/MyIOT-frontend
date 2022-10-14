@@ -1,0 +1,121 @@
+.container {
+  width: 100%;
+  background-color: #555;
+}
+
+.header {
+  width: 100%;
+  margin: auto;
+  margin-bottom: 1rem;
+}
+
+.title {
+  color: white;
+  font-weight: 500;
+  text-align: center;
+}
+
+.header-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 90%;
+  margin: auto;
+}
+
+.button-create {
+  width: 7rem;
+  background-color: darkgreen;
+  color: white;
+  margin-left: .5rem;
+}
+
+.button-delete-all {
+  width: 7rem;
+  margin-left: .5rem;
+}
+
+.button-refresh {
+  width: 7rem;
+  margin-left: .5rem;
+  background-color: darkcyan;
+}
+
+.button-reconnect {
+  width: 7rem;
+  margin-left: .5rem;
+  background-color: darkslateblue;
+}
+
+.header-menu {
+  display: none;
+  width: 90%;
+  margin: auto;
+}
+
+.button-menu {
+  width: 5rem;
+  background-color: darkslateblue;
+  color: white;
+}
+
+.content {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.device-card {
+  width: 15rem;
+  height: auto;
+  margin: .5rem;
+  background-color: white;
+  border-radius: .5rem;
+}
+
+.device-card-content {
+  margin: 1rem;
+}
+
+.device-card-menu {
+  float: right;
+  margin-top: .5rem;
+}
+
+.device-card-text-key {
+  margin: auto;
+}
+
+.device-card-text-value {
+  color: darkslateblue;
+  font-weight: 500;
+  word-wrap: break-word;
+}
+
+.device-card-icon-true{
+  color: green;
+}
+
+.device-card-icon-false{
+  color: #555;
+}
+
+@media only screen and (max-width:900px) {
+
+  .header-buttons {
+    display: none;
+  }
+
+  .header-menu {
+    display: block;
+  }
+
+  .device-card {
+    width: 100%;
+    margin: 1rem 0;
+  }
+
+}
