@@ -18,7 +18,9 @@ import {MatListModule} from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatMenuModule} from '@angular/material/menu';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle'
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatDividerModule} from '@angular/material/divider';
+import { NgChartsModule }  from  'ng2-charts' ;
 
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -40,7 +42,7 @@ import { CreateUserComponent } from './components/user/create-user/create-user.c
 import { UpdateUserComponent } from './components/user/update-user/update-user.component';
 import { UserComponent } from './components/user/user.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-import {MatDividerModule} from '@angular/material/divider';
+
 
 @NgModule({
   declarations: [
@@ -90,7 +92,8 @@ import {MatDividerModule} from '@angular/material/divider';
     MatSliderModule,
     MatMenuModule,
     MatDividerModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    NgChartsModule,
   ],
   providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]

@@ -69,9 +69,9 @@
 }
 
 .device-card {
-  width: 15rem;
+  width: 100%;
   height: auto;
-  margin: .5rem;
+  margin: 1rem 0;
   background-color: white;
   border-radius: .5rem;
 }
@@ -107,10 +107,6 @@
 
   .header-buttons {
     display: none;
-  }
-
-  .header-menu {
-    display: block;
   }
 
   .device-card {

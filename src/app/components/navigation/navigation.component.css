@@ -16,6 +16,7 @@
   background-color: darkslateblue;
   color: white;
   border-radius: 2rem;
+  position: fixed;
 }
 
 .sidenav-logo {

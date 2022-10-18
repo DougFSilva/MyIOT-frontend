@@ -56,18 +56,27 @@
         </button>
       </mat-menu>
       <div class="device-card-content">
-        <h5 class="device-card-text-key">Nome:</h5>
+        <h3 class="device-card-text-key">Nome:</h3>
         <h3 class="device-card-text-value">{{ device.name }}</h3>
         <h5 class="device-card-text-key">Localização:</h5>
         <h3 class="device-card-text-value">{{ device.location }}</h3>
         <h5 class="device-card-text-key">Tópico Mqtt:</h5>
         <h3 class="device-card-text-value">iot/MeasuringDevice/{{ device.id }}</h3>
-        <h5 class="device-card-text-key">Elementos de medição</h5>
-        <h5 class="device-card-text-value" *ngFor="let keyName of device.keyNames">{{keyName}}</h5>
-        <h5 class="device-card-text-key">Values</h5>
-        <h5 class="device-card-text-value" *ngFor="let value of device.values">
-          <h5>{{value.values}}</h5>
-        </h5>
+        <div class="flex">
+          <div class="flex-item">
+            <div style="display: block;">
+            <canvas baseChart width="400" height="200"
+                        [data]="getChartConfiguration(device)"
+                        [options]="lineChartOptions"
+                        [type]="lineChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"
+                        [labels]="device.keyNames"
+                        >
+                      </canvas>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

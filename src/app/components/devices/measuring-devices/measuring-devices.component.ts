@@ -1,140 +1,261 @@
-import { MeasuredValue } from './../../../models/Measuredvalue';
-import { UpdateMeasuringDeviceComponent } from './update-measuring-device/update-measuring-device.component';
-import { CreateMeasuringDeviceComponent } from './create-measuring-device/create-measuring-device.component';
-import { MeasuringDeviceService } from './../../../services/measuring-device.service';
-import { MeasuringDevice } from './../../../models/MeasuringDevice';
-import { Component, OnInit } from '@angular/core';
+import {
+  Chart,
+  ChartConfiguration,
+  ChartDataset,
+  ChartEvent,
+  ChartType,
+} from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import * as SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
+
 import { API_CONFIG } from 'src/app/config/API_CONFIG';
-import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
+import { MeasuredValue } from 'src/app/models/Measuredvalue';
+import { UpdateMeasuringDeviceComponent } from './update-measuring-device/update-measuring-device.component';
+import { CreateMeasuringDeviceComponent } from './create-measuring-device/create-measuring-device.component';
+import { MeasuringDeviceService } from 'src/app/services/measuring-device.service';
+import { MeasuringDevice } from 'src/app/models/MeasuringDevice';
 
 @Component({
   selector: 'app-measuring-devices',
   templateUrl: './measuring-devices.component.html',
-  styleUrls: ['./measuring-devices.component.css']
+  styleUrls: ['./measuring-devices.component.css'],
 })
 export class MeasuringDevicesComponent implements OnInit {
-
   devices: MeasuringDevice[] = [];
   measuredValue: MeasuredValue = {
-   id: "",
-   deviceId: "",
-   timestamp: "",
-   values: []
-  }
+    id: '',
+    deviceId: '',
+    timestamp: '',
+    values: null,
+  };
   public stompClient;
+
+  // Gráfico
+  public lineChartColor = [{
+    backgroundColor: 'rgba(92, 255, 130, 0.3)',
+    borderColor: 'green',
+    pointBackgroundColor: 'lightGreen',
+    pointBorderColor: 'green',
+    pointHoverBackgroundColor: 'green',
+    pointHoverBorderColor: 'red',
+  },
+  {
+    backgroundColor: 'rgba(255, 153, 0, 0.2)',
+    borderColor: 'coral',
+    pointBackgroundColor: 'lightCoral',
+    pointBorderColor: 'coral',
+    pointHoverBackgroundColor: 'coral',
+    pointHoverBorderColor: 'red',
+  },
+  {
+    backgroundColor: 'rgba(0, 120, 255, 0.2)',
+    borderColor: 'skyBlue',
+    pointBackgroundColor: 'lightSkyBlue',
+    pointBorderColor: 'skyBlue',
+    pointHoverBackgroundColor: 'skyBlue',
+    pointHoverBorderColor: 'red',
+  },
+]
+  public lineChartOptions: ChartConfiguration['options'] = {
+    responsive:true,
+    elements: {
+      line: {
+        tension: 0.5,
+      },
+
+    },
+    scales: {
+      // We use this empty structure as a placeholder for dynamic theming.
+      x: {
+        display: false,
+      },
+      'y-axis-0': {
+        position: 'left',
+      },
+    },
+  };
+
+  public lineChartType: ChartType = 'line';
+
+  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+
   constructor(
     private service: MeasuringDeviceService,
     private route: ActivatedRoute,
     private toast: ToastrService,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.devices = this.route.snapshot.data["devices"]
-    this.webSocketConnect()
+    this.devices = this.route.snapshot.data['devices'];
+    this.webSocketConnect();
   }
 
-  ngOnDestroy() : void {
-    this.webSocketDisconnect()
+  ngOnDestroy(): void {
+    this.webSocketDisconnect();
   }
 
   webSocketConnect(): void {
-    if(this.stompClient){
-      this.toast.info("Já conectado!", "INFO")
-      return
+    if (this.stompClient) {
+      this.toast.info('Já conectado!', 'INFO');
+      return;
     }
-     const socket = new SockJS(`${API_CONFIG.baseUrl}/myiot-websocket/?token=` + localStorage.getItem("token"));
-     this.stompClient = Stomp.over(socket);
-     const that = this;
-     this.stompClient.connect({}, function (frame) {
-       that.stompClient.subscribe('/user/queue/message/measuring-device', function (message) {
-         that.measuredValue = JSON.parse(message.body);
-         const index = that.devices.map(device => device.id).indexOf(that.measuredValue.deviceId)
-         that.devices[index].values.push(that.measuredValue)
-       });
-     });
-   }
+    const socket = new SockJS(
+      `${API_CONFIG.baseUrl}/myiot-websocket/?token=` +
+        localStorage.getItem('token')
+    );
+    this.stompClient = Stomp.over(socket);
+    const that = this;
+    this.stompClient.connect({}, function (frame) {
+      that.stompClient.subscribe(
+        '/user/queue/message/measuring-device',
+        function (message) {
+          that.measuredValue = JSON.parse(message.body);
+          console.log(that.measuredValue);
+          const index = that.devices
+            .map((device) => device.id)
+            .indexOf(that.measuredValue.deviceId);
+          that.devices[index].values.push(that.measuredValue);
+        }
+      );
+    });
+  }
 
-   webSocketDisconnect(): void {
-     if (this.stompClient != null) {
-       this.stompClient.disconnect();
-     }
-   }
+  webSocketDisconnect(): void {
+    if (this.stompClient != null) {
+      this.stompClient.disconnect();
+    }
+  }
 
-   findDevices(): void {
-     this.service.findAllByUser().subscribe(
-       (response) => {
-         this.devices = response;
+  findDevices(): void {
+    this.service.findAllByUser().subscribe(
+      (response) => {
+        this.devices = response;
+      },
+      (ex) => {
+        this.toast.error(ex.error.error, 'ERRO');
+      }
+    );
+  }
 
-       },
-       (ex) => {
-         this.toast.error(ex.error.error, 'ERRO');
-       }
-     );
-   }
-
-   dataUpdate(): void {
-    this.service.findAllByUser().subscribe(response => {
+  dataUpdate(): void {
+    this.service.findAllByUser().subscribe((response) => {
       this.devices = response;
-      this.devices.forEach(device => {
-        console.log(device.values)
-       })
-      this.toast.success("Dados atualizados!", "SUCESSO")
+      this.devices.forEach((device) => {
+        console.log(device.values);
+      });
+      this.toast.success('Dados atualizados!', 'SUCESSO');
+    });
+  }
+
+  create(): void {
+    let dialog = this.dialog.open(CreateMeasuringDeviceComponent);
+    dialog.afterClosed().subscribe((response) => {
+      this.findDevices();
+    });
+  }
+
+  deleteAll(): void {
+    let dialog = this.dialog.open(ConfirmDialogComponent);
+    dialog.afterClosed().subscribe((response) => {
+      if (response == 'true') {
+        this.service.deleteByUser().subscribe(
+          (response) => {
+            this.toast.success(
+              'Dispositivos deletados com sucesso!',
+              'SUCESSO'
+            );
+            this.findDevices();
+          },
+          (ex) => {
+            this.toast.error(ex.error.error, 'ERRO');
+          }
+        );
+      }
+      return;
+    });
+  }
+
+  deleteById(id: string): void {
+    let dialog = this.dialog.open(ConfirmDialogComponent);
+    dialog.afterClosed().subscribe((response) => {
+      if (response == 'true') {
+        this.service.deleteById(id).subscribe(
+          (response) => {
+            this.toast.success('Dispositivo deletado com sucesso!', 'SUCESSO');
+            this.findDevices();
+          },
+          (ex) => {
+            this.toast.error(ex.error.error, 'ERRO');
+          }
+        );
+      }
+      return;
+    });
+  }
+
+  updateById(id: string): void {
+    let dialog = this.dialog.open(UpdateMeasuringDeviceComponent, {
+      data: { id },
+    });
+    dialog.afterClosed().subscribe((response) => {
+      this.findDevices();
+    });
+  }
+
+  getChartConfiguration(device: MeasuringDevice): ChartConfiguration['data'] {
+    let lineChartData: ChartConfiguration['data'] = {
+      datasets: [],
+      labels: [],
+    };
+    for (let index = 0; index < device.keyNames.length; index++) {
+      let chartData: ChartDataset = {
+        data: [],
+        label: device.keyNames[index],
+        backgroundColor: this.lineChartColor[index].backgroundColor,
+        borderColor: this.lineChartColor[index].borderColor,
+        pointBackgroundColor: this.lineChartColor[index].pointBackgroundColor,
+        pointBorderColor: this.lineChartColor[index].pointBorderColor,
+        pointHoverBackgroundColor: this.lineChartColor[index].pointHoverBackgroundColor,
+        pointHoverBorderColor: this.lineChartColor[index].pointHoverBorderColor,
+        fill: 'origin',
+        spanGaps:true,
+        animation: false
+      };
+      device.values.forEach((measuredValue) => {
+        chartData.data.push(measuredValue.values[index]);
+      });
+      lineChartData.datasets.push(chartData);
+    }
+    device.values.forEach(measuredValue => {
+      lineChartData.labels.push(measuredValue.timestamp)
     })
-   }
+    return lineChartData;
+  }
 
-   create(): void {
-     let dialog = this.dialog.open(CreateMeasuringDeviceComponent);
-     dialog.afterClosed().subscribe( response => {
-       this.findDevices()
-     })
-   }
+  public chartClicked({
+    event,
+    active,
+  }: {
+    event?: ChartEvent;
+    active?: {}[];
+  }): void {
+    console.log(event, active);
+  }
 
-   deleteAll(): void {
-     let dialog = this.dialog.open(ConfirmDialogComponent);
-     dialog.afterClosed().subscribe((response) => {
-       if (response == 'true') {
-         this.service.deleteByUser().subscribe(
-           (response) => {
-             this.toast.success('Dispositivos deletados com sucesso!','SUCESSO');
-             this.findDevices()
-           },
-           (ex) => {
-             this.toast.error(ex.error.error, 'ERRO');
-           }
-         );
-       }
-         return;
-     });
-   }
-
-   deleteById(id: string): void {
-     let dialog = this.dialog.open(ConfirmDialogComponent);
-     dialog.afterClosed().subscribe((response) => {
-       if (response == 'true') {
-         this.service.deleteById(id).subscribe(
-           (response) => {
-             this.toast.success('Dispositivo deletado com sucesso!','SUCESSO');
-             this.findDevices()
-           },
-           (ex) => {
-             this.toast.error(ex.error.error, 'ERRO');
-           }
-         );
-       }
-         return;
-     });
-   }
-
-   updateById(id: string): void {
-     let dialog = this.dialog.open(UpdateMeasuringDeviceComponent, {data:{id}})
-     dialog.afterClosed().subscribe(response => {
-       this.findDevices()
-     })
-   }
+  public chartHovered({
+    event,
+    active,
+  }: {
+    event?: ChartEvent;
+    active?: {}[];
+  }): void {
+    console.log(event, active);
+  }
 }
