@@ -38,9 +38,11 @@
         </button>
       </mat-menu>
     </div>
-    <input type="datetime-local" name="initial-datetime" class="datetime-selector" [(ngModel)]="initialDateTime">
-    <input type="datetime-local" name="final-datetime" class="datetime-selector" [(ngModel)]="finalDateTime">
-    <button mat-raised-button (click)="dateTimeFilter()"><mat-icon>filter_list</mat-icon>filtrar</button>
+    <div class="header-datetime-filter">
+      <input type="datetime-local" name="initial-datetime" class="datetime-selector mat-elevation-z4" [(ngModel)]="initialDateTime">
+      <input type="datetime-local" name="final-datetime" class="datetime-selector mat-elevation-z4" [(ngModel)]="finalDateTime">
+      <button mat-raised-button (click)="dateTimeFilter()" class="datetime-filter-button mat-elevation-z4"><mat-icon>filter_list</mat-icon>filtrar</button>
+    </div>
   </div>
   <mat-divider class="divider"></mat-divider>
   <div class="content">

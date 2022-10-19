@@ -67,6 +67,14 @@ export class MeasuringDevicesComponent implements OnInit {
       pointHoverBackgroundColor: 'skyBlue',
       pointHoverBorderColor: 'red',
     },
+    {
+      backgroundColor: 'rgba(127, 0, 132, 0.2)',
+      borderColor: 'blueViolet',
+      pointBackgroundColor: 'violet',
+      pointBorderColor: 'blueViolet',
+      pointHoverBackgroundColor: 'blueViolet',
+      pointHoverBorderColor: 'red',
+    },
   ];
   public lineChartOptions: ChartConfiguration['options'] = {
     elements: {

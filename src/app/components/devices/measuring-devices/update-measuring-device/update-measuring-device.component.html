@@ -1,1 +1,56 @@
-<p>update-measuring-device works!</p>
+<div class="container">
+  <div class="card">
+    <h1 class="card-title">Adicionar dispositivo Discreto</h1>
+    <form class="form">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Digite o local de instalação</mat-label>
+        <input
+          matInput
+          placeholder="Sala de estar, cozinha, sala de aula..."
+          [formControl]="location"
+          [(ngModel)]="device.location"
+          name="location"
+          required
+        />
+        <mat-icon matSuffix class="icon">add_location</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Digite o nome do dispositivo</mat-label>
+        <input
+          matInput
+          placeholder="motor, lâmpada..."
+          [formControl]="name"
+          [(ngModel)]="device.name"
+          name="name"
+          required
+        />
+        <mat-icon matSuffix class="icon">short_text</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field-keyName">
+        <mat-label>Digite o nome do elemento de medição a adicionar</mat-label>
+        <input
+          matInput
+          placeholder="Temperatura, pressão, umidade..."
+          [formControl]="keyNames"
+          [(ngModel)]="keyName"
+          name="keyName"
+        />
+        <mat-icon matSuffix class="icon">short_text</mat-icon>
+      </mat-form-field>
+      <button mat-raised-button [disabled]="!addKeyNameValidFields()" (click)="addKeyName()" class="form-button-add">
+        Adicionar
+      </button>
+      <div class="form-keyName">
+        <h3 *ngFor="let keyName of device.keyNames" class="form-keyName-text mat-elevation-z4">
+          {{keyName}}
+          <mat-icon class="form-keyName-text-icon" (click)="removeKeyName(keyName)">delete</mat-icon></h3>
+      </div>
+      <button mat-raised-button [disabled]="!createValidFields()" (click)="update()" class="form-button-create">
+        Atualizar
+      </button>
+      <button mat-stroked-button class="form-button-cancel" color="warn" mat-dialog-close="false">
+        Cancelar
+      </button>
+    </form>
+  </div>
+</div>

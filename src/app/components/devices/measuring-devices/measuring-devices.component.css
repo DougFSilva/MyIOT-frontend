@@ -27,7 +27,6 @@
   width: 7rem;
   background-color: darkgreen;
   color: white;
-  margin-left: .5rem;
 }
 
 .button-delete-all {
@@ -57,6 +56,24 @@
   width: 5rem;
   background-color: darkslateblue;
   color: white;
+}
+
+.header-datetime-filter{
+  width: 90%;
+  margin: auto;
+}
+
+.datetime-selector{
+  height: 1.6rem;
+  margin: .4rem .2rem 0 0;
+  padding: .2rem;
+  border-radius: .8rem;
+}
+
+.datetime-filter-button {
+  background-color: darkslateblue;
+  color: white;
+  margin-top: .4rem;
 }
 
 .content {
@@ -104,9 +121,8 @@
     display: none;
   }
 
-  .device-card {
-    width: 100%;
-    margin: 1rem 0;
+  .header-menu {
+    display: block;
   }
 
 }
