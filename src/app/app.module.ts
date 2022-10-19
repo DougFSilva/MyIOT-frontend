@@ -21,6 +21,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDividerModule} from '@angular/material/divider';
 import { NgChartsModule }  from  'ng2-charts' ;
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -94,8 +96,10 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     MatDividerModule,
     MatSlideToggleModule,
     NgChartsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [AuthInterceptorProvider],
+  providers: [AuthInterceptorProvider, MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

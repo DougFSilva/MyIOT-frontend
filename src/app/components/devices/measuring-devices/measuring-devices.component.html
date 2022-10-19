@@ -38,6 +38,9 @@
         </button>
       </mat-menu>
     </div>
+    <input type="datetime-local" name="initial-datetime" class="datetime-selector" [(ngModel)]="initialDateTime">
+    <input type="datetime-local" name="final-datetime" class="datetime-selector" [(ngModel)]="finalDateTime">
+    <button mat-raised-button (click)="dateTimeFilter()"><mat-icon>filter_list</mat-icon>filtrar</button>
   </div>
   <mat-divider class="divider"></mat-divider>
   <div class="content">
@@ -62,20 +65,15 @@
         <h3 class="device-card-text-value">{{ device.location }}</h3>
         <h5 class="device-card-text-key">Tópico Mqtt:</h5>
         <h3 class="device-card-text-value">iot/MeasuringDevice/{{ device.id }}</h3>
-        <div class="flex">
-          <div class="flex-item">
-            <div style="display: block;">
-            <canvas baseChart width="400" height="200"
-                        [data]="getChartConfiguration(device)"
-                        [options]="lineChartOptions"
-                        [type]="lineChartType"
-                        (chartHover)="chartHovered($event)"
-                        (chartClick)="chartClicked($event)"
-                        [labels]="device.keyNames"
-                        >
-                      </canvas>
-            </div>
-          </div>
+        <div class="chartArea">
+          <canvas baseChart width="600" height="300"
+            [data]="getChartConfiguration(device)"
+            [options]="lineChartOptions"
+            [type]="lineChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"
+            [labels]="device.keyNames">
+          </canvas>
         </div>
       </div>
     </div>

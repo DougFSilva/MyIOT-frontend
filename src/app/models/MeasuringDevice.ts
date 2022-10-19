@@ -4,6 +4,6 @@ export interface MeasuringDevice {
   userId: string,
   location: string,
   name: string,
-  keyNames: string[]
+  keyNames: string[],
   values: MeasuredValue[]
 }

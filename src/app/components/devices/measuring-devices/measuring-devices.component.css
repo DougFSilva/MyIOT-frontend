@@ -95,12 +95,7 @@
   word-wrap: break-word;
 }
 
-.device-card-icon-true{
-  color: green;
-}
-
-.device-card-icon-false{
-  color: #555;
+.chartArea{
 }
 
 @media only screen and (max-width:900px) {

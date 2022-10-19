@@ -16,6 +16,6 @@ export class MeasuringDeviceResolver implements Resolve<Observable<MeasuringDevi
     private service: MeasuringDeviceService
   ){}
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<MeasuringDevice[]> {
-    return this.service.findAllByUser()
+    return this.service.findAllByUser(100)
   }
 }

@@ -33,19 +33,25 @@ export class MeasuredValueService {
 
   deleteByTimeRange(deviceId: string, filter: DateFilter) {
     return this.http.delete(
-      `${API_CONFIG.baseUrl}/measured-value/device-id=${deviceId}/date=${filter.initialDate}-${filter.finalDate}/time=${filter.initialTime}-${filter.finalTime}`
+      `${API_CONFIG.baseUrl}/measured-value/device-id=${deviceId}/date=${filter.initialDate}to${filter.finalDate}/time=${filter.initialTime}to${filter.finalTime}`
     );
   }
 
-  findAllByDevice(deviceId: string): Observable<MeasuredValue[]> {
+  findAllByDevice(
+    deviceId: string,
+    limit: number
+  ): Observable<MeasuredValue[]> {
     return this.http.get<MeasuredValue[]>(
-      `${API_CONFIG.baseUrl}/measured-value/device-id=${deviceId}`
+      `${API_CONFIG.baseUrl}/measured-value/device-id=${deviceId}/limit=${limit}`
     );
   }
 
-  findByTimeRange(deviceId: string, filter: DateFilter): Observable<MeasuredValue[]> {
+  findByTimeRange(
+    deviceId: string,
+    filter: DateFilter
+  ): Observable<MeasuredValue[]> {
     return this.http.get<MeasuredValue[]>(
-      `${API_CONFIG.baseUrl}/measured-value/device-id=${deviceId}/date=${filter.initialDate}-${filter.finalDate}/time=${filter.initialTime}-${filter.finalTime}`
+      `${API_CONFIG.baseUrl}/measured-value/device-id=${deviceId}/date=${filter.initialDate}to${filter.finalDate}/time=${filter.initialTime}to${filter.finalTime}`
     );
   }
 }

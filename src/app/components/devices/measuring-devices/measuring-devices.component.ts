@@ -4,9 +4,10 @@ import {
   ChartDataset,
   ChartEvent,
   ChartType,
+  TimeScale,
 } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,6 +21,7 @@ import { UpdateMeasuringDeviceComponent } from './update-measuring-device/update
 import { CreateMeasuringDeviceComponent } from './create-measuring-device/create-measuring-device.component';
 import { MeasuringDeviceService } from 'src/app/services/measuring-device.service';
 import { MeasuringDevice } from 'src/app/models/MeasuringDevice';
+import { DateFilter } from 'src/app/models/DateFilter';
 
 @Component({
   selector: 'app-measuring-devices',
@@ -27,58 +29,65 @@ import { MeasuringDevice } from 'src/app/models/MeasuringDevice';
   styleUrls: ['./measuring-devices.component.css'],
 })
 export class MeasuringDevicesComponent implements OnInit {
-  devices: MeasuringDevice[] = [];
+  public devices: MeasuringDevice[] = [];
+  initialDateTime: string;
+  finalDateTime: string;
+  measurementLimit:number;
   measuredValue: MeasuredValue = {
     id: '',
     deviceId: '',
-    timestamp: '',
+    timestamp: new Date(),
     values: null,
   };
   public stompClient;
 
   // Gráfico
-  public lineChartColor = [{
-    backgroundColor: 'rgba(92, 255, 130, 0.3)',
-    borderColor: 'green',
-    pointBackgroundColor: 'lightGreen',
-    pointBorderColor: 'green',
-    pointHoverBackgroundColor: 'green',
-    pointHoverBorderColor: 'red',
-  },
-  {
-    backgroundColor: 'rgba(255, 153, 0, 0.2)',
-    borderColor: 'coral',
-    pointBackgroundColor: 'lightCoral',
-    pointBorderColor: 'coral',
-    pointHoverBackgroundColor: 'coral',
-    pointHoverBorderColor: 'red',
-  },
-  {
-    backgroundColor: 'rgba(0, 120, 255, 0.2)',
-    borderColor: 'skyBlue',
-    pointBackgroundColor: 'lightSkyBlue',
-    pointBorderColor: 'skyBlue',
-    pointHoverBackgroundColor: 'skyBlue',
-    pointHoverBorderColor: 'red',
-  },
-]
+  public lineChartColor = [
+    {
+      backgroundColor: 'rgba(92, 255, 130, 0.3)',
+      borderColor: 'green',
+      pointBackgroundColor: 'lightGreen',
+      pointBorderColor: 'green',
+      pointHoverBackgroundColor: 'green',
+      pointHoverBorderColor: 'red',
+    },
+    {
+      backgroundColor: 'rgba(255, 153, 0, 0.2)',
+      borderColor: 'coral',
+      pointBackgroundColor: 'lightCoral',
+      pointBorderColor: 'coral',
+      pointHoverBackgroundColor: 'coral',
+      pointHoverBorderColor: 'red',
+    },
+    {
+      backgroundColor: 'rgba(0, 120, 255, 0.2)',
+      borderColor: 'skyBlue',
+      pointBackgroundColor: 'lightSkyBlue',
+      pointBorderColor: 'skyBlue',
+      pointHoverBackgroundColor: 'skyBlue',
+      pointHoverBorderColor: 'red',
+    },
+  ];
   public lineChartOptions: ChartConfiguration['options'] = {
-    responsive:true,
     elements: {
       line: {
         tension: 0.5,
       },
-
     },
     scales: {
-      // We use this empty structure as a placeholder for dynamic theming.
       x: {
-        display: false,
+        display: 'auto',
+        ticks: {
+          autoSkip: true,
+          minRotation: 90,
+          maxRotation: 90,
+        }
       },
       'y-axis-0': {
         position: 'left',
       },
     },
+
   };
 
   public lineChartType: ChartType = 'line';
@@ -92,13 +101,28 @@ export class MeasuringDevicesComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.screenResize()
+}
+
   ngOnInit(): void {
+    this.screenResize()
     this.devices = this.route.snapshot.data['devices'];
+    this.measurementLimit=100
     this.webSocketConnect();
   }
 
   ngOnDestroy(): void {
     this.webSocketDisconnect();
+  }
+
+  screenResize(): void {
+    if(window.innerWidth < 900){
+      this.lineChartOptions.scales['x'].display = false
+    }else {
+      this.lineChartOptions.scales['x'].display = 'auto'
+    }
   }
 
   webSocketConnect(): void {
@@ -117,7 +141,6 @@ export class MeasuringDevicesComponent implements OnInit {
         '/user/queue/message/measuring-device',
         function (message) {
           that.measuredValue = JSON.parse(message.body);
-          console.log(that.measuredValue);
           const index = that.devices
             .map((device) => device.id)
             .indexOf(that.measuredValue.deviceId);
@@ -134,7 +157,7 @@ export class MeasuringDevicesComponent implements OnInit {
   }
 
   findDevices(): void {
-    this.service.findAllByUser().subscribe(
+    this.service.findAllByUser(this.measurementLimit).subscribe(
       (response) => {
         this.devices = response;
       },
@@ -144,12 +167,19 @@ export class MeasuringDevicesComponent implements OnInit {
     );
   }
 
+  findDevicesByTimeRange(initialDate: string, finalDate: string, initialTime:string, finalTime:string ): void{
+    const filter = new DateFilter(initialDate, finalDate, initialTime, finalTime)
+    this.service.findAllByUserAndTimeRange(this.measurementLimit, filter).subscribe(response => {
+      this.devices = response
+      this.toast.success("Dados atualizados", 'SUCESSO')
+    }, (ex) => {
+      this.toast.error(ex.error.error, "ERRO")
+    })
+  }
+
   dataUpdate(): void {
-    this.service.findAllByUser().subscribe((response) => {
+    this.service.findAllByUser(this.measurementLimit).subscribe((response) => {
       this.devices = response;
-      this.devices.forEach((device) => {
-        console.log(device.values);
-      });
       this.toast.success('Dados atualizados!', 'SUCESSO');
     });
   }
@@ -167,10 +197,7 @@ export class MeasuringDevicesComponent implements OnInit {
       if (response == 'true') {
         this.service.deleteByUser().subscribe(
           (response) => {
-            this.toast.success(
-              'Dispositivos deletados com sucesso!',
-              'SUCESSO'
-            );
+            this.toast.success('Dispositivos deletados com sucesso!','SUCESSO');
             this.findDevices();
           },
           (ex) => {
@@ -201,9 +228,7 @@ export class MeasuringDevicesComponent implements OnInit {
   }
 
   updateById(id: string): void {
-    let dialog = this.dialog.open(UpdateMeasuringDeviceComponent, {
-      data: { id },
-    });
+    let dialog = this.dialog.open(UpdateMeasuringDeviceComponent, {data: { id },});
     dialog.afterClosed().subscribe((response) => {
       this.findDevices();
     });
@@ -222,40 +247,44 @@ export class MeasuringDevicesComponent implements OnInit {
         borderColor: this.lineChartColor[index].borderColor,
         pointBackgroundColor: this.lineChartColor[index].pointBackgroundColor,
         pointBorderColor: this.lineChartColor[index].pointBorderColor,
-        pointHoverBackgroundColor: this.lineChartColor[index].pointHoverBackgroundColor,
+        pointStyle:'line',
+        pointHoverBackgroundColor:
+        this.lineChartColor[index].pointHoverBackgroundColor,
         pointHoverBorderColor: this.lineChartColor[index].pointHoverBorderColor,
         fill: 'origin',
-        spanGaps:true,
-        animation: false
+        spanGaps: true,
+        animation: false,
       };
       device.values.forEach((measuredValue) => {
-        chartData.data.push(measuredValue.values[index]);
+      chartData.data.push(measuredValue.values[index]);
       });
       lineChartData.datasets.push(chartData);
     }
-    device.values.forEach(measuredValue => {
-      lineChartData.labels.push(measuredValue.timestamp)
-    })
+    device.values.forEach((measuredValue) => {
+    lineChartData.labels.push(measuredValue.timestamp.toLocaleString().substring(2,19));
+    });
     return lineChartData;
   }
 
-  public chartClicked({
-    event,
-    active,
-  }: {
+  public chartClicked({event,active,}: {
     event?: ChartEvent;
     active?: {}[];
-  }): void {
-    console.log(event, active);
-  }
+  }): void {}
 
-  public chartHovered({
-    event,
-    active,
-  }: {
+  public chartHovered({event,active,}: {
     event?: ChartEvent;
     active?: {}[];
-  }): void {
-    console.log(event, active);
-  }
+  }): void {}
+
+  dateTimeFilter() {
+    const initialDateTime = new Date(this.initialDateTime)
+    const finalDateTime = new Date(this.finalDateTime)
+    this.findDevicesByTimeRange(
+      initialDateTime.toLocaleDateString('fr-CA'),
+      finalDateTime.toLocaleDateString('fr-CA'),
+      initialDateTime.toLocaleTimeString(),
+      finalDateTime.toLocaleTimeString()
+    )
+}
+
 }
