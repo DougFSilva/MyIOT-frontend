@@ -40,7 +40,6 @@ export class MeasuringDevicesComponent implements OnInit {
     values: null,
   };
   public stompClient;
-
   // Gráfico
   public lineChartColor = [
     {
@@ -95,7 +94,6 @@ export class MeasuringDevicesComponent implements OnInit {
         position: 'left',
       },
     },
-
   };
 
   public lineChartType: ChartType = 'line';
@@ -293,6 +291,6 @@ export class MeasuringDevicesComponent implements OnInit {
       initialDateTime.toLocaleTimeString(),
       finalDateTime.toLocaleTimeString()
     )
-}
+  }
 
 }

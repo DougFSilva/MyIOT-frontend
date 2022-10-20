@@ -71,7 +71,7 @@
 }
 
 .datetime-filter-button {
-  background-color: darkslateblue;
+  background-color: green;
   color: white;
   margin-top: .4rem;
 }
@@ -112,10 +112,11 @@
   word-wrap: break-word;
 }
 
-.chartArea{
-}
-
 @media only screen and (max-width:900px) {
+
+  .title {
+    font-size: 100%;
+  }
 
   .header-buttons {
     display: none;
@@ -123,6 +124,15 @@
 
   .header-menu {
     display: block;
+  }
+
+  .button-menu {
+    float: right;
+  }
+
+  .header-datetime-filter{
+    display: flex;
+    flex-direction: column;
   }
 
 }

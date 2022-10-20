@@ -25,7 +25,6 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 
 import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './components/home/home.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AnalogOutputDevicesComponent } from './components/devices/analog-output-devices/analog-output-devices.component';
@@ -44,13 +43,13 @@ import { CreateUserComponent } from './components/user/create-user/create-user.c
 import { UpdateUserComponent } from './components/user/update-user/update-user.component';
 import { UserComponent } from './components/user/user.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
     AnalogOutputDevicesComponent,
     AnalogOutputDeviceComponent,
     CreateAnalogOutputDeviceComponent,
@@ -69,6 +68,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     FooterComponent,
     UserComponent,
     ConfirmDialogComponent,
+    HomeComponent,
 
   ],
   imports: [

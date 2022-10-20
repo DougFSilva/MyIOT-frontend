@@ -1,3 +1,4 @@
+import { HomeComponent } from 'src/app/components/home/home.component';
 import { MeasuringDeviceResolver } from './components/devices/measuring-devices/measuring-device.resolver';
 import { DiscreteDeviceResolver } from './components/devices/discrete-devices/discrete-device.resolver';
 import { AnalogOutputDeviceResolver } from './components/devices/analog-output-devices/analog-output-device.resolver';
@@ -8,7 +9,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from 'src/app/components/login/login.component';
 import { NavigationComponent } from 'src/app/components/navigation/navigation.component';
-import { HomeComponent } from 'src/app/components/home/home.component';
 import { CreateUserComponent } from 'src/app/components/user/create-user/create-user.component';
 import { UpdateUserComponent } from 'src/app/components/user/update-user/update-user.component';
 import { AnalogOutputDevicesComponent } from './components/devices/analog-output-devices/analog-output-devices.component';
@@ -40,6 +40,7 @@ const routes: Routes = [
     component: NavigationComponent,
     canActivate: [AuthGuard],
     children: [
+
       {
         path: 'home',
         component: HomeComponent,

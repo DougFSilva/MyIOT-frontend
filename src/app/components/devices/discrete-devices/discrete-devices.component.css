@@ -105,6 +105,10 @@
 
 @media only screen and (max-width:900px) {
 
+  .title {
+    font-size: 100%;
+  }
+
   .header-buttons {
     display: none;
   }

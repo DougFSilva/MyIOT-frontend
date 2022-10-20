@@ -1,12 +1,32 @@
-
-
-
-
-<h3>{{user.id}}</h3>
-<h3>{{user.email}}</h3>
-<h3>{{user.name}}</h3>
-<h3>{{user.clientMqttPassword}}</h3>
-<h3 *ngFor="let profile of user.profiles">{{profile.type}}</h3>
-
-
+<div class="container">
+  <div class="card mat-elevation-z4">
+    <h1 class="title">
+      Meus Dados
+    </h1>
+    <div class="card-item">
+      <h3>ID: </h3>
+      <h3>{{user.id}}</h3>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="card-item">
+      <h3>Email: </h3>
+      <h3>{{user.email}}</h3>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="card-item">
+      <h3>Nome: </h3>
+      <h3>{{user.name}}</h3>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="card-item">
+      <h3>Password MQTT: </h3>
+      <h3>{{user.clientMqttPassword}}</h3>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="card-item">
+      <h3>Perfil: </h3>
+      <h3 *ngFor="let profile of user.profiles">{{profile.type}}</h3>
+    </div>
+  </div>
+</div>
 
