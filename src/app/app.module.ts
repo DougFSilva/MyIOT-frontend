@@ -44,6 +44,7 @@ import { UpdateUserComponent } from './components/user/update-user/update-user.c
 import { UserComponent } from './components/user/user.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { HomeComponent } from './components/home/home.component';
+import { UpdatePasswordComponent } from './components/user/update-password/update-password.component';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { HomeComponent } from './components/home/home.component';
     UserComponent,
     ConfirmDialogComponent,
     HomeComponent,
+    UpdatePasswordComponent,
 
   ],
   imports: [
