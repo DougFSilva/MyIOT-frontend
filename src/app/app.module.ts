@@ -26,6 +26,9 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatTableModule} from '@angular/material/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
+import  {  ClipboardModule  }  from  'ngx-clipboard' ;
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 import { LoginComponent } from './components/login/login.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -99,7 +102,9 @@ import { AdminComponent } from './components/user/admin/admin.component';
     MatNativeDateModule,
     MatTableModule,
     MatCheckboxModule,
-    MatTabsModule
+    MatTabsModule,
+    ClipboardModule,
+    MatTooltipModule
   ],
   providers: [AuthInterceptorProvider, MatDatepickerModule],
   bootstrap: [AppComponent]

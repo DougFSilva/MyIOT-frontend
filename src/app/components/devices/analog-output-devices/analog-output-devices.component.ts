@@ -69,6 +69,7 @@ export class AnalogOutputDevicesComponent implements OnInit, OnDestroy {
         that.deviceUpdated = JSON.parse(message.body);
         const index = that.devices.map(device => device.id).indexOf(that.deviceUpdated.id)
         that.devices[index] = that.deviceUpdated
+        that.toast.info("Dispositivo atualizado!", "INFORMAÇÂO")
       });
     });
   }
@@ -167,5 +168,9 @@ export class AnalogOutputDevicesComponent implements OnInit, OnDestroy {
         this.toast.error(ex.error.error, 'ERRO');
       }
     );
+  }
+
+  copySucessfully(): void {
+    this.toast.success("Tópico copiado para área de transferência", "SUCESSO")
   }
 }

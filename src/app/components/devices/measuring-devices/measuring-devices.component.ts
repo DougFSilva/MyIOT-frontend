@@ -334,4 +334,7 @@ export class MeasuringDevicesComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  copySucessfully(): void {
+    this.toast.success("Tópico copiado para área de transferência", "SUCESSO")
+  }
 }

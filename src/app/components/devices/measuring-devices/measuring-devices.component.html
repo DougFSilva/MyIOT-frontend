@@ -67,14 +67,23 @@
           <mat-icon>delete</mat-icon>
           <span>Deletar medições</span>
         </button>
+        <button mat-menu-item ngxClipboard
+          [cbContent]=' "iot/MeasuringDevice/" + device.id'
+          (click)="copySucessfully()"
+          #tooltip="matTooltip"
+          [matTooltip]=' "iot/MeasuringDevice/" + device.id'
+          matTooltipPosition="left"
+          matTooltipHideDelay="10000"
+        >
+          <mat-icon>file_copy</mat-icon>
+          Copiar topico MQTT
+        </button>
       </mat-menu>
       <div class="device-card-content">
         <h3 class="device-card-text-key">Nome:</h3>
         <h3 class="device-card-text-value">{{ device.name }}</h3>
         <h5 class="device-card-text-key">Localização:</h5>
         <h3 class="device-card-text-value">{{ device.location }}</h3>
-        <h5 class="device-card-text-key">Tópico Mqtt:</h5>
-        <h3 class="device-card-text-value">iot/MeasuringDevice/{{ device.id }}</h3>
         <mat-tab-group animationDuration="400ms">
           <mat-tab label="Gráfico">
             <div class="chartArea">

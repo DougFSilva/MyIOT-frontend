@@ -56,7 +56,7 @@ export class DiscreteDevicesComponent implements OnInit, OnDestroy {
          that.deviceUpdated = JSON.parse(message.body);
          const index = that.devices.map(device => device.id).indexOf(that.deviceUpdated.id)
          that.devices[index] = that.deviceUpdated
-         that.toast.success("Dispositivo atualizado!", "SUCESSO")
+         that.toast.info("Dispositivo atualizado!", "INFORMAÇÂO")
        });
      });
    }
@@ -141,12 +141,16 @@ export class DiscreteDevicesComponent implements OnInit, OnDestroy {
    updateStatus(id: string, status: boolean): void {
      this.service.publishStatusOnBrokerMqtt(id, status).subscribe(
        (response) => {
-         this.toast.show('Comando publicado com sucesso!', 'SUCESSO');
+         this.toast.success('Comando publicado com sucesso!', 'SUCESSO');
        },
        (ex) => {
          this.toast.error(ex.error.error, 'ERRO');
        }
      );
    }
+
+   copySucessfully(): void {
+    this.toast.success("Tópico copiado para área de transferência", "SUCESSO")
+  }
 
 }
