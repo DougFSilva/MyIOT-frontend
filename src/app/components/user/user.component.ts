@@ -19,6 +19,7 @@ export class UserComponent implements OnInit {
     id: "",
     email: "",
     name: "",
+    password: "",
     clientMqttPassword: "",
     approvedRegistration: false,
     profiles:[]

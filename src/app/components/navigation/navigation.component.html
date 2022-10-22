@@ -1,7 +1,7 @@
 <mat-drawer-container class="container" autosize >
   <mat-drawer #drawer mode="side" class="sidenav mat-elevation-z4" [mode]="sideNavMode" [opened]="sideNavOpen">
     <mat-nav-list>
-      <img src="../../../assets/img/logo.png" alt="Logo Myiot" class="sidenav-logo">
+      <img src="assets/img/logo.png" alt="Logo Myiot" class="sidenav-logo">
       <div *ngIf="sideNavMode == 'side'; else elseBlock">
         <a mat-list-item routerLink="home" class="sidenav-list-item">
           <mat-icon class="sidenav-icons">home</mat-icon>
@@ -23,7 +23,7 @@
           <mat-icon class="sidenav-icons">account_circle</mat-icon>
           Minha conta
         </a>
-        <a mat-list-item *ngIf="userProfile == 'ADMIN'" class="sidenav-list-item">
+        <a mat-list-item routerLink="admin" *ngIf="userProfile == 'ADMIN'" class="sidenav-list-item">
           <mat-icon class="sidenav-icons">person_outline</mat-icon>
           Administrador
         </a>
@@ -49,11 +49,11 @@
           <mat-icon class="sidenav-icons">insert_chart_outlined</mat-icon>
           Dispositivos de medição
         </a>
-        <a mat-list-item routerLink="user" class="sidenav-list-item" (click)="drawer.toggle()">
+        <a mat-list-item routerLink="user" (click)="drawer.toggle()" class="sidenav-list-item" >
           <mat-icon class="sidenav-icons">account_circle</mat-icon>
           Minha conta
         </a>
-        <a mat-list-item *ngIf="userProfile == 'ADMIN'" class="sidenav-list-item">
+        <a mat-list-item *ngIf="userProfile == 'ADMIN'" routerLink="admin" (click)="drawer.toggle()" class="sidenav-list-item">
           <mat-icon class="sidenav-icons">person_outline</mat-icon>
           Administrador
         </a>

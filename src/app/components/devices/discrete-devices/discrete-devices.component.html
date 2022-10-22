@@ -56,16 +56,21 @@
         </button>
       </mat-menu>
       <div class="device-card-content">
-        <h5 class="device-card-text-key">Nome:</h5>
-        <h3 class="device-card-text-value">{{ device.name }}</h3>
-        <h5 class="device-card-text-key">Localização:</h5>
-        <h3 class="device-card-text-value">{{ device.location }}</h3>
-        <h5 class="device-card-text-key">Tópico Mqtt:</h5>
-        <h3 class="device-card-text-value">iot/DiscreteDevice/{{ device.id }}</h3>
-        <h5 class="device-card-text-key">Status</h5>
-        <h1 class="device-card-status" *ngIf="device.status"><mat-icon class="device-card-icon-true">offline_bolt</mat-icon></h1>
-        <h1 class="device-card-status" *ngIf="!device.status"><mat-icon class="device-card-icon-false">offline_bolt</mat-icon></h1>
-          <mat-slide-toggle [(ngModel)]="device.status" (change)="updateStatus(device.id, device.status)"></mat-slide-toggle>
+        <h5>Nome:</h5>
+        <h3>{{ device.name }}</h3>
+        <h5>Localização:</h5>
+        <h3>{{ device.location }}</h3>
+        <h5>Tópico Mqtt:</h5>
+        <h3>iot/DiscreteDevice/{{ device.id }}</h3>
+        <h5>Status</h5>
+        <h1 *ngIf="device.status"><mat-icon class="device-card-icon-true">offline_bolt</mat-icon>Ligado</h1>
+        <h1 *ngIf="!device.status"><mat-icon class="device-card-icon-false">offline_bolt</mat-icon>Desligado</h1>
+        <div class="device-card-buttons">
+          <button mat-raised-button aria-label="icon ON button" (click)="updateStatus(device.id, true)"
+            class="device-card-button device-card-button-on mat-elevation-z4">ON</button>
+          <button mat-raised-button aria-label="icon OFF button" (click)="updateStatus(device.id, false)"
+           class="device-card-button device-card-button-off mat-elevation-z4 ">OFF</button>
+        </div>
       </div>
     </div>
   </div>

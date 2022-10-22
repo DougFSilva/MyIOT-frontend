@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  width: 90%;
+  width: 100%;
   margin: auto;
 }
 
@@ -49,7 +49,7 @@
 
 .header-menu {
   display: none;
-  width: 90%;
+  width: 100%;
   margin: auto;
 }
 
@@ -57,27 +57,22 @@
   width: 5rem;
   background-color: darkslateblue;
   color: white;
+  margin-right: .5rem;
 }
 
 .content {
-  width: 90%;
+  width: 100%;
   margin: auto;
   margin-bottom: 3rem;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .device-card {
-  width: 15rem;
   height: auto;
   margin: .5rem;
   background-color: white;
   border-radius: .5rem;
-}
-
-.device-card-content {
-  margin: 1rem;
 }
 
 .device-card-menu {
@@ -85,14 +80,19 @@
   margin-top: .5rem;
 }
 
-.device-card-text-key {
-  margin: auto;
+.device-card-content {
+  margin: 1rem;
 }
 
-.device-card-text-value {
+.device-card-content h3 {
+  width: 100%;
   color: darkslateblue;
   font-weight: 500;
-  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.device-card-content h5 {
+  margin: auto;
 }
 
 .device-card-slider {
@@ -113,9 +113,12 @@
     display: block;
   }
 
-  .device-card {
-    width: 1rem;
-    margin: 1rem 0;
+  .button-menu {
+    float: right;
+  }
+
+  .content {
+    grid-template-columns: auto;
   }
 
 }

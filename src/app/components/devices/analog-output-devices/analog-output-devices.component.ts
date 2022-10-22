@@ -83,13 +83,20 @@ export class AnalogOutputDevicesComponent implements OnInit, OnDestroy {
     this.service.findAllByUser().subscribe(
       (response) => {
         this.devices = response;
-        this.toast.success("Dados atualizados!", "SUCESSO")
       },
       (ex) => {
         this.toast.error(ex.error.error, 'ERRO');
       }
     );
   }
+
+  dataUpdate(): void {
+    this.service.findAllByUser().subscribe(response => {
+      this.devices = response;
+      this.toast.success("Dados atualizados!", "SUCESSO")
+    })
+   }
+
 
   create(): void {
     let dialog = this.dialog.open(CreateAnalogOutputDeviceComponent);
@@ -137,6 +144,9 @@ export class AnalogOutputDevicesComponent implements OnInit, OnDestroy {
   updateById(id: string): void {
     let dialog = this.dialog.open(UpdateAnalogOutputDeviceComponent, {data:{id}})
     dialog.afterClosed().subscribe(response => {
+      if(response == false){
+        return
+      }
       this.findDevices()
     })
   }

@@ -23,6 +23,9 @@ import {MatDividerModule} from '@angular/material/divider';
 import { NgChartsModule }  from  'ng2-charts' ;
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatTableModule} from '@angular/material/table';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { LoginComponent } from './components/login/login.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -31,20 +34,17 @@ import { AnalogOutputDevicesComponent } from './components/devices/analog-output
 import { DiscreteDevicesComponent } from './components/devices/discrete-devices/discrete-devices.component';
 import { MeasuringDevicesComponent } from './components/devices/measuring-devices/measuring-devices.component';
 import { UpdateMeasuringDeviceComponent } from './components/devices/measuring-devices/update-measuring-device/update-measuring-device.component';
-import { DiscreteDeviceComponent } from './components/devices/discrete-devices/discrete-device/discrete-device.component';
-import { MeasuringDeviceComponent } from './components/devices/measuring-devices/measuring-device/measuring-device.component';
-import { AnalogOutputDeviceComponent } from './components/devices/analog-output-devices/analog-output-device/analog-output-device.component';
 import { CreateAnalogOutputDeviceComponent } from './components/devices/analog-output-devices/create-analog-output-device/create-analog-output-device.component';
 import { UpdateAnalogOutputDeviceComponent } from './components/devices/analog-output-devices/update-analog-output-device/update-analog-output-device.component';
 import { CreateMeasuringDeviceComponent } from './components/devices/measuring-devices/create-measuring-device/create-measuring-device.component';
 import { CreateDiscreteDeviceComponent } from './components/devices/discrete-devices/create-discrete-device/create-discrete-device.component';
 import { UpdateDiscreteDeviceComponent } from './components/devices/discrete-devices/update-discrete-device/update-discrete-device.component';
 import { CreateUserComponent } from './components/user/create-user/create-user.component';
-import { UpdateUserComponent } from './components/user/update-user/update-user.component';
 import { UserComponent } from './components/user/user.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { HomeComponent } from './components/home/home.component';
 import { UpdatePasswordComponent } from './components/user/update-password/update-password.component';
+import { AdminComponent } from './components/user/admin/admin.component';
 
 
 @NgModule({
@@ -52,25 +52,22 @@ import { UpdatePasswordComponent } from './components/user/update-password/updat
     AppComponent,
     LoginComponent,
     AnalogOutputDevicesComponent,
-    AnalogOutputDeviceComponent,
     CreateAnalogOutputDeviceComponent,
     UpdateAnalogOutputDeviceComponent,
     DiscreteDevicesComponent,
-    DiscreteDeviceComponent,
     CreateDiscreteDeviceComponent,
     UpdateDiscreteDeviceComponent,
     MeasuringDevicesComponent,
-    MeasuringDeviceComponent,
     CreateMeasuringDeviceComponent,
     UpdateMeasuringDeviceComponent,
     NavigationComponent,
     CreateUserComponent,
-    UpdateUserComponent,
     FooterComponent,
     UserComponent,
     ConfirmDialogComponent,
     HomeComponent,
     UpdatePasswordComponent,
+    AdminComponent,
 
   ],
   imports: [
@@ -99,7 +96,10 @@ import { UpdatePasswordComponent } from './components/user/update-password/updat
     MatSlideToggleModule,
     NgChartsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatTabsModule
   ],
   providers: [AuthInterceptorProvider, MatDatepickerModule],
   bootstrap: [AppComponent]

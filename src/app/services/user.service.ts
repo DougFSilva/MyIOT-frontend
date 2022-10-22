@@ -1,11 +1,10 @@
-import { UserUpdatePasswordForm } from './../models/UserUpdatePasswordForm';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { UserForm } from 'src/app/models/UserForm';
 import { User } from 'src/app/models/User';
 import { API_CONFIG } from 'src/app/config/API_CONFIG';
+import { UserUpdatePasswordForm } from 'src/app/models/UserUpdatePasswordForm';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +12,7 @@ import { API_CONFIG } from 'src/app/config/API_CONFIG';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  create(form: UserForm): Observable<User> {
+  create(form: User): Observable<User> {
     return this.http.post<User>(`${API_CONFIG.baseUrl}/user`, form);
   }
 
@@ -21,7 +20,7 @@ export class UserService {
     return this.http.delete(`${API_CONFIG.baseUrl}/user`);
   }
 
-  update(form: UserForm): Observable<User> {
+  update(form: User): Observable<User> {
     return this.http.put<User>(`${API_CONFIG.baseUrl}/user`, form);
   }
 

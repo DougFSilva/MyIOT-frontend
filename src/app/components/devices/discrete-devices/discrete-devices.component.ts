@@ -131,6 +131,9 @@ export class DiscreteDevicesComponent implements OnInit, OnDestroy {
    updateById(id: string): void {
      let dialog = this.dialog.open(UpdateDiscreteDeviceComponent, {data:{id}})
      dialog.afterClosed().subscribe(response => {
+      if(response == false){
+        return
+      }
        this.findDevices()
      })
    }

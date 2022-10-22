@@ -1,3 +1,4 @@
+import { AdminComponent } from './components/user/admin/admin.component';
 import { HomeComponent } from 'src/app/components/home/home.component';
 import { MeasuringDeviceResolver } from './components/devices/measuring-devices/measuring-device.resolver';
 import { DiscreteDeviceResolver } from './components/devices/discrete-devices/discrete-device.resolver';
@@ -10,17 +11,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from 'src/app/components/login/login.component';
 import { NavigationComponent } from 'src/app/components/navigation/navigation.component';
 import { CreateUserComponent } from 'src/app/components/user/create-user/create-user.component';
-import { UpdateUserComponent } from 'src/app/components/user/update-user/update-user.component';
 import { AnalogOutputDevicesComponent } from './components/devices/analog-output-devices/analog-output-devices.component';
-import { AnalogOutputDeviceComponent } from './components/devices/analog-output-devices/analog-output-device/analog-output-device.component';
 import { CreateAnalogOutputDeviceComponent } from './components/devices/analog-output-devices/create-analog-output-device/create-analog-output-device.component';
 import { UpdateAnalogOutputDeviceComponent } from './components/devices/analog-output-devices/update-analog-output-device/update-analog-output-device.component';
 import { DiscreteDevicesComponent } from './components/devices/discrete-devices/discrete-devices.component';
-import { DiscreteDeviceComponent } from './components/devices/discrete-devices/discrete-device/discrete-device.component';
 import { CreateDiscreteDeviceComponent } from './components/devices/discrete-devices/create-discrete-device/create-discrete-device.component';
 import { UpdateDiscreteDeviceComponent } from './components/devices/discrete-devices/update-discrete-device/update-discrete-device.component';
 import { MeasuringDevicesComponent } from './components/devices/measuring-devices/measuring-devices.component';
-import { MeasuringDeviceComponent } from './components/devices/measuring-devices/measuring-device/measuring-device.component';
 import { CreateMeasuringDeviceComponent } from './components/devices/measuring-devices/create-measuring-device/create-measuring-device.component';
 import { UpdateMeasuringDeviceComponent } from './components/devices/measuring-devices/update-measuring-device/update-measuring-device.component';
 import { AuthGuard } from './auth/auth.guard';
@@ -46,21 +43,17 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: 'user',
-        component: UserComponent,
+        path: 'admin',
+        component: AdminComponent,
       },
       {
-        path: 'user/update/:id',
-        component: UpdateUserComponent,
+        path: 'user',
+        component: UserComponent,
       },
       {
         path: 'analog-output-device/all',
         component: AnalogOutputDevicesComponent,
         resolve: {devices : AnalogOutputDeviceResolver}
-      },
-      {
-        path: 'analog-output-device:/id',
-        component: AnalogOutputDeviceComponent,
       },
       {
         path: 'analog-output-device/create',
@@ -76,10 +69,6 @@ const routes: Routes = [
         resolve: {devices: DiscreteDeviceResolver}
       },
       {
-        path: 'discrete-device/:id',
-        component: DiscreteDeviceComponent,
-      },
-      {
         path: 'discrete-device/create',
         component: CreateDiscreteDeviceComponent,
       },
@@ -91,10 +80,6 @@ const routes: Routes = [
         path: 'measuring-device/all',
         component: MeasuringDevicesComponent,
         resolve: {devices: MeasuringDeviceResolver}
-      },
-      {
-        path: 'measuring-device/:id',
-        component: MeasuringDeviceComponent
       },
       {
         path: 'measuring-device/create',

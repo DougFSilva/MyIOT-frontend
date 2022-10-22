@@ -1,6 +1,6 @@
 <div class="container">
   <div class="card">
-    <h1 class="card-title">Adicionar dispositivo Discreto</h1>
+    <h1 class="card-title">Editar dispositivo</h1>
     <form class="form">
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Digite o local de instalação</mat-label>
@@ -46,7 +46,7 @@
           <mat-icon class="form-keyName-text-icon" (click)="removeKeyName(keyName)">delete</mat-icon></h3>
       </div>
       <button mat-raised-button [disabled]="!createValidFields()" (click)="update()" class="form-button-create">
-        Atualizar
+        Salvar
       </button>
       <button mat-stroked-button class="form-button-cancel" color="warn" mat-dialog-close="false">
         Cancelar

@@ -28,7 +28,7 @@
           <mat-icon>delete_forever</mat-icon>
           <span>Deletar todos</span>
         </button>
-        <button mat-menu-item (click)="findDevices()">
+        <button mat-menu-item (click)="dataUpdate()">
           <mat-icon>refresh</mat-icon>
           <span>Atualizar</span>
         </button>
@@ -56,14 +56,14 @@
         </button>
       </mat-menu>
       <div class="device-card-content">
-        <h5 class="device-card-text-key">Nome:</h5>
-        <h3 class="device-card-text-value">{{ device.name }}</h3>
-        <h5 class="device-card-text-key">Localização:</h5>
-        <h3 class="device-card-text-value">{{ device.location }}</h3>
-        <h5 class="device-card-text-key">Tópico Mqtt:</h5>
-        <h3 class="device-card-text-value">iot/AnalogOutputDevice/{{ device.id }}</h3>
-        <h5 class="device-card-text-key">Output</h5>
-        <h1 class="device-card-output">{{ device.output }}</h1>
+        <h5>Nome:</h5>
+        <h3>{{ device.name }}</h3>
+        <h5>Localização:</h5>
+        <h3>{{ device.location }}</h3>
+        <h5>Tópico Mqtt:</h5>
+        <h3>iot/AnalogOutputDevice/{{ device.id }}</h3>
+        <h5>Output</h5>
+        <h1>{{ device.output }}</h1>
         <mat-slider
           class="device-card-slider"
           [disabled]="disabled"

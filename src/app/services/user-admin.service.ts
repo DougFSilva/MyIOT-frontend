@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { UserForm } from 'src/app/models/UserForm';
 import { API_CONFIG } from 'src/app/config/API_CONFIG';
 import { User } from 'src/app/models/User';
 
@@ -17,7 +16,7 @@ export class UserAdminService {
     return this.http.delete(`${API_CONFIG.baseUrl}/admin/id=${id}`)
   }
 
-  update(id: string, form: UserForm): Observable<User> {
+  update(id: string, form: User): Observable<User> {
     return this.http.put<User>(`${API_CONFIG.baseUrl}/admin/id=${id}`, form)
   }
 

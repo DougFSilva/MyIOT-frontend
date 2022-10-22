@@ -1,9 +1,10 @@
-import { UserForm } from './../../../models/UserForm';
 import { Router } from '@angular/router';
-import { UserService } from './../../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/User';
 
 @Component({
   selector: 'app-create-user',
@@ -12,10 +13,14 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CreateUserComponent implements OnInit {
 
-  form: UserForm = {
+  form: User = {
+    id: "",
     email: "",
     name: "",
-    password: ""
+    password: "",
+    clientMqttPassword: "",
+    approvedRegistration: false,
+    profiles: []
   }
   email = new FormControl(null, Validators.minLength(5));
   name = new FormControl(null, Validators.minLength(3));
@@ -31,11 +36,11 @@ export class CreateUserComponent implements OnInit {
   }
 
   create():void {
+    console.log(this.form)
     this.service.create(this.form).subscribe(response => {
       this.toast.success("Usuário criado com sucesso!", "SUCESSO")
       this.router.navigate(["login"])
     }, (ex) => {
-      console.log(ex)
       this.toast.error(ex.error.error, "ERROR")
     })
   }

@@ -75,4 +75,21 @@
     width: 100%;
   }
 
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  .form {
+    width: 100%;
+    padding: 0;
+  }
+  .form-field-keyName {
+    width: 60%;
+  }
+
+  .form-button-add {
+    width: 38%;
+    margin-left: 2%;
+  }
+
 }

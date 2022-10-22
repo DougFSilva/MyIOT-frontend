@@ -20,8 +20,10 @@ import { MeasuredValue } from 'src/app/models/Measuredvalue';
 import { UpdateMeasuringDeviceComponent } from './update-measuring-device/update-measuring-device.component';
 import { CreateMeasuringDeviceComponent } from './create-measuring-device/create-measuring-device.component';
 import { MeasuringDeviceService } from 'src/app/services/measuring-device.service';
+import { MeasuredValueService } from 'src/app/services/measured-value.service';
 import { MeasuringDevice } from 'src/app/models/MeasuringDevice';
 import { DateFilter } from 'src/app/models/DateFilter';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-measuring-devices',
@@ -29,7 +31,7 @@ import { DateFilter } from 'src/app/models/DateFilter';
   styleUrls: ['./measuring-devices.component.css'],
 })
 export class MeasuringDevicesComponent implements OnInit {
-  public devices: MeasuringDevice[] = [];
+  devices: MeasuringDevice[] = [];
   initialDateTime: string;
   finalDateTime: string;
   measurementLimit:number;
@@ -96,12 +98,18 @@ export class MeasuringDevicesComponent implements OnInit {
     },
   };
 
+  //Tabela
+  ELEMENT_DATA: MeasuringDevice[] = [];
+  displayedColumns: string[] = ['timestamp', 'name', 'weight', 'symbol'];
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+
   public lineChartType: ChartType = 'line';
 
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
   constructor(
     private service: MeasuringDeviceService,
+    private measuredValueService: MeasuredValueService,
     private route: ActivatedRoute,
     private toast: ToastrService,
     private dialog: MatDialog
@@ -240,6 +248,34 @@ export class MeasuringDevicesComponent implements OnInit {
     });
   }
 
+  deleteAllMeasuredValues(deviceId: string): void {
+    let dialog = this.dialog.open(ConfirmDialogComponent)
+    dialog.afterClosed().subscribe(response => {
+      if(response == "true"){
+        this.measuredValueService.deleteAllByDevice(deviceId).subscribe(response => {
+          this.toast.success("Medições deletadas com sucesso!", "SUCESSO")
+          this.findDevices()
+        },(ex) => {
+          this.toast.error(ex.error.error, "ERRO")
+        })
+      }
+    })
+  }
+
+  deleteMeasuredValue(deviceId: string, id: string): void{
+    let dialog = this.dialog.open(ConfirmDialogComponent)
+    dialog.afterClosed().subscribe(response => {
+      if(response == "true"){
+        this.measuredValueService.deleteById(deviceId, id).subscribe(response => {
+          this.toast.success("Medição deletada com sucesso!", "SUCESSO")
+          this.findDevices()
+        },(ex) => {
+          this.toast.error(ex.error.error, "ERRO")
+        })
+      }
+    })
+  }
+
   getChartConfiguration(device: MeasuringDevice): ChartConfiguration['data'] {
     let lineChartData: ChartConfiguration['data'] = {
       datasets: [],
@@ -291,6 +327,11 @@ export class MeasuringDevicesComponent implements OnInit {
       initialDateTime.toLocaleTimeString(),
       finalDateTime.toLocaleTimeString()
     )
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }
