@@ -84,15 +84,16 @@
   margin: 1rem;
 }
 
+.device-card-content h2 {
+  margin: 0;
+}
+
 .device-card-content h3 {
   width: 100%;
   color: darkslateblue;
   font-weight: 500;
   word-break: break-all;
-}
-
-.device-card-content h5 {
-  margin: auto;
+  margin: 0;
 }
 
 .device-card-slider {

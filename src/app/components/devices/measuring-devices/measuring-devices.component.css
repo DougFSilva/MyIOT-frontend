@@ -96,18 +96,20 @@
   padding: 1rem;
 }
 
-.device-card-menu {
-  float: right;
+.device-card-content h2 {
+  margin: 0;
 }
 
-.device-card-text-key {
-  margin: auto;
-}
-
-.device-card-text-value {
+.device-card-content h3 {
+  width: 100%;
   color: darkslateblue;
   font-weight: 500;
-  word-wrap: break-word;
+  word-break: break-all;
+  margin: 0;
+}
+
+.device-card-menu {
+  float: right;
 }
 
 table {
