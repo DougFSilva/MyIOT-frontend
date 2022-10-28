@@ -1,6 +1,6 @@
 <div class="container">
-  <h1 class="title">DISPOSITIVOS DE MEDIÇÃO</h1>
-  <div class="header">
+  <h1>DISPOSITIVOS DE MEDIÇÃO</h1>
+  <header>
     <div class="header-buttons">
       <button mat-raised-button (click)="create()" class="button-create">
         <mat-icon>add_box</mat-icon>Adicionar
@@ -38,7 +38,7 @@
         </button>
       </mat-menu>
     </div>
-    <div class="header-datetime-filter">
+    <section class="header-datetime-filter">
       <input type="datetime-local" name="initial-datetime" class="datetime-selector mat-elevation-z4"
         [(ngModel)]="initialDateTime">
       <input type="datetime-local" name="final-datetime" class="datetime-selector mat-elevation-z4"
@@ -46,11 +46,11 @@
       <button mat-raised-button (click)="dateTimeFilter()"
         class="datetime-filter-button mat-elevation-z4"><mat-icon>filter_list</mat-icon>filtrar
       </button>
-    </div>
-  </div>
+    </section>
+  </header>
   <mat-divider class="divider"></mat-divider>
-  <div class="content">
-    <div *ngFor="let device of devices" class="device-card mat-elevation-z4">
+  <main>
+    <section *ngFor="let device of devices" class="device-card mat-elevation-z4">
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Icon menu" class="device-card-menu">
         <mat-icon>more_vert</mat-icon>
       </button>
@@ -80,8 +80,8 @@
         </button>
       </mat-menu>
       <div class="device-card-content">
-        <h2>{{ device.name }}</h2>
-        <h3>{{ device.location }}</h3>
+        <h2 class="device-card-name">{{ device.name }}</h2>
+        <h3 class="device-card-location">{{ device.location }}</h3>
         <mat-tab-group animationDuration="400ms">
           <mat-tab label="Gráfico">
             <div class="chartArea">
@@ -117,8 +117,7 @@
             </table>
           </mat-tab>
         </mat-tab-group>
-
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 </div>

@@ -3,13 +3,13 @@
   background-color: #555;
 }
 
-.header {
+header {
   width: 100%;
   margin: auto;
   margin-bottom: 1rem;
 }
 
-.title {
+h1 {
   color: white;
   font-weight: 500;
   text-align: center;
@@ -60,7 +60,7 @@
   margin-right: .5rem;
 }
 
-.content {
+main {
   width: 100%;
   margin: auto;
   margin-bottom: 3rem;
@@ -84,16 +84,26 @@
   margin: 1rem;
 }
 
-.device-card-content h2 {
+.device-card-name {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
   margin: 0;
 }
 
-.device-card-content h3 {
-  width: 100%;
+.device-card-location {
+  display: block;
   color: darkslateblue;
-  font-weight: 500;
+  font-weight: bold;
   word-break: break-all;
   margin: 0;
+}
+
+.device-card-output {
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+  margin-top: .5rem;
 }
 
 .device-card-slider {
@@ -102,7 +112,7 @@
 
 @media only screen and (max-width:900px) {
 
-  .title {
+  h1  {
     font-size: 100%;
   }
 
@@ -118,7 +128,7 @@
     float: right;
   }
 
-  .content {
+  main {
     grid-template-columns: auto;
   }
 

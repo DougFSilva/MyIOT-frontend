@@ -28,6 +28,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
 import  {  ClipboardModule  }  from  'ngx-clipboard' ;
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 import { LoginComponent } from './components/login/login.component';
@@ -104,7 +105,8 @@ import { AdminComponent } from './components/user/admin/admin.component';
     MatCheckboxModule,
     MatTabsModule,
     ClipboardModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatPaginatorModule
   ],
   providers: [AuthInterceptorProvider, MatDatepickerModule],
   bootstrap: [AppComponent]

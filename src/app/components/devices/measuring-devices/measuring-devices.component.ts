@@ -337,4 +337,5 @@ export class MeasuringDevicesComponent implements OnInit {
   copySucessfully(): void {
     this.toast.success("Tópico copiado para área de transferência", "SUCESSO")
   }
+
 }

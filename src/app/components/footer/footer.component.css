@@ -1,11 +1,14 @@
-.footer {
+footer {
   width: 100%;
   height: auto;
   background-color: darkslateblue;
   padding-top: 2rem;
 }
 
-.footer-text {
+span {
+  display: block;
+  margin: .5rem;
+  width: 100%;
   color: white;
   text-align: center;
 }

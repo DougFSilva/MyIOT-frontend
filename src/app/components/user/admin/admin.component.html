@@ -1,6 +1,6 @@
 <div class="container">
-  <h1 class="title">USUÁRIOS</h1>
-  <div class="header">
+  <h1>USUÁRIOS</h1>
+  <header>
     <mat-form-field appearance="standard" class="table-filter">
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium"#input/>
@@ -11,8 +11,8 @@
     <mat-checkbox [formControl]="selectNotApproved" (change)="filterByNotApproved()">
       Não aprovados
     </mat-checkbox>
-  </div>
-  <div class="user-table">
+  </header>
+  <section class="user-table">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef>Email</th>
@@ -74,8 +74,8 @@
         <td class="mat-cell" colspan="4">Sem dados!</td>
       </tr>
     </table>
-  </div>
-  <div class="user-card">
+  </section>
+  <section class="user-card">
     <div class="card mat-elevation-z4" *ngFor="let user of dataSource.filteredData">
       <mat-icon class="card-icon-options" [matMenuTriggerFor]="menu">more_vert</mat-icon>
           <mat-menu #menu="matMenu">
@@ -104,22 +104,22 @@
             </button>
           </mat-menu>
           <div class="card-item">
-            <h5>Email:</h5>
-            <h4>{{user.email}}</h4>
+            <span>Email:</span>
+            <span>{{user.email}}</span>
           </div>
           <div class="card-item">
-            <h5>Nome:</h5>
-            <h4>{{user.name}}</h4>
+            <span>Nome:</span>
+            <span>{{user.name}}</span>
           </div>
           <div class="card-item">
-            <h5>Aprovação:</h5>
-            <h4 *ngIf="user.approvedRegistration; else elseBlock">Aprovado</h4>
+            <span>Aprovação:</span>
+            <span *ngIf="user.approvedRegistration; else elseBlock">Aprovado</span>
             <ng-template #elseBlock><h4>Não aprovado</h4></ng-template>
           </div>
           <div class="card-item">
-            <h5>Perfil:</h5>
-            <h4>{{user.profiles[0].type}}</h4>
+            <span>Perfil:</span>
+            <span>{{user.profiles[0].type}}</span>
           </div>
     </div>
-  </div>
+  </section>
 </div>

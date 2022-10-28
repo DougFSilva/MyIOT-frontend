@@ -2,7 +2,8 @@
   <mat-drawer #drawer mode="side" class="sidenav mat-elevation-z4" [mode]="sideNavMode" [opened]="sideNavOpen">
     <mat-nav-list>
       <img src="assets/img/logo.png" alt="Logo Myiot" class="sidenav-logo">
-      <div *ngIf="sideNavMode == 'side'; else elseBlock">
+
+      <section *ngIf="sideNavMode == 'side'; else elseBlock">
         <a mat-list-item routerLink="home" class="sidenav-list-item">
           <mat-icon class="sidenav-icons">home</mat-icon>
           home
@@ -31,7 +32,8 @@
           <mat-icon class="sidenav-icons">exit_to_app</mat-icon>
           Logout
         </a>
-      </div>
+      </section>
+
       <ng-template #elseBlock>
         <a mat-list-item routerLink="home" class="sidenav-list-item" (click)="drawer.toggle()">
           <mat-icon class="sidenav-icons">home</mat-icon>
@@ -66,14 +68,12 @@
     </mat-nav-list>
   </mat-drawer>
 
-  <div class="sidenav-content">
+  <main>
     <button type="button" mat-button (click)="drawer.toggle()" class="sidenav-button mat-elevation-z4">
       <mat-icon>menu</mat-icon>
     </button>
-    <div>
-      <router-outlet></router-outlet>
-    </div>
+    <router-outlet></router-outlet>
     <app-footer></app-footer>
-  </div>
+  </main>
 </mat-drawer-container>
 

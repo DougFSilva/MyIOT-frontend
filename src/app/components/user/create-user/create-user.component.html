@@ -1,8 +1,8 @@
 <div class="container">
   <mat-card class="card mat-elevation-z8">
-    <img class="logo" src="../../../assets/img/logo.png" />
-    <h1 class="card-title">Crie sua conta</h1>
-    <form class="form">
+    <img class="logo" src="assets/img/logo.png" />
+    <h1>Crie sua conta</h1>
+    <form>
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Digite seu nome</mat-label>
         <input
@@ -40,20 +40,10 @@
         />
         <mat-icon matSuffix class="icon">lock</mat-icon>
       </mat-form-field>
-      <button
-        mat-raised-button
-        [disabled]="!validFields()"
-        (click)="create()"
-        class="form-button"
-      >
+      <button mat-raised-button [disabled]="!validFields()" (click)="create()" class="form-button">
         Criar
       </button>
-      <button
-        mat-stroked-button
-        class="form-button-cancelar"
-        color="warn"
-        routerLink="/login"
-      >
+      <button mat-stroked-button class="form-button-cancelar" color="warn" routerLink="/login">
         Cancelar
       </button>
     </form>

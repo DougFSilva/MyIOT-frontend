@@ -6,7 +6,7 @@ header {
   width: 100%;
 }
 
-header h1 {
+h1 {
   margin-top: 1rem;
   color: white;
   font-size: 2rem;
@@ -16,7 +16,7 @@ header h1 {
   animation-direction: alternate;
 }
 
-.grid {
+main {
   display: grid;
   grid-template-columns: auto auto;
   column-gap: 2rem;
@@ -57,7 +57,7 @@ header h1 {
   transform: scale(1.01);
 }
 
-.card h1 {
+h2 {
   width: 90%;
   margin: auto;
   background-color: #555;
@@ -68,7 +68,7 @@ header h1 {
 }
 
 @media only screen and (max-width:768px){
-  .grid {
+  main {
     grid-template-columns: auto;
   }
 }

@@ -1,6 +1,6 @@
 <div class="container">
-  <h1 class="title">DISPOSITIVOS ANALÓGICOS</h1>
-  <div class="header">
+  <h1>DISPOSITIVOS ANALÓGICOS</h1>
+  <header>
     <div class="header-buttons">
       <button mat-raised-button (click)="create()" class="button-create">
         <mat-icon>add_box</mat-icon>Adicionar
@@ -38,10 +38,10 @@
         </button>
       </mat-menu>
     </div>
-  </div>
-  <mat-divider class="divider"></mat-divider>
-  <div class="content">
-    <div *ngFor="let device of devices" class="device-card mat-elevation-z4">
+  </header>
+  <mat-divider></mat-divider>
+  <main>
+    <section *ngFor="let device of devices" class="device-card mat-elevation-z4">
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Icon menu" class="device-card-menu">
         <mat-icon>more_vert</mat-icon>
       </button>
@@ -67,9 +67,9 @@
         </button>
       </mat-menu>
       <div class="device-card-content">
-        <h2>{{ device.name }}</h2>
-        <h3>{{ device.location }}</h3>
-        <h1>{{ device.output }}</h1>
+        <span class="device-card-name">{{ device.name }}</span>
+        <span class="device-card-location">{{ device.location }}</span>
+        <span class="device-card-output">{{ device.output }}</span>
         <mat-slider
           class="device-card-slider"
           [disabled]="disabled"
@@ -86,6 +86,6 @@
         >
         </mat-slider>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 </div>
