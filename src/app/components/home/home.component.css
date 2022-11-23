@@ -24,19 +24,19 @@ main {
   padding: 1rem;
 }
 
-.grid div:nth-child(1){
+main div:nth-child(1){
   background-image: url("../../../assets/img/analog-device.jpeg");
 }
 
-.grid div:nth-child(2){
+main div:nth-child(2){
   background-image: url("../../../assets/img/discrete-device.jpeg");
 }
 
-.grid div:nth-child(3){
+main div:nth-child(3){
   background-image: url("../../../assets/img/measuring-device.jpeg");
 }
 
-.grid div:nth-child(4){
+main div:nth-child(4){
   background-image: url("../../../assets/img/account.jpeg");
 }
 
