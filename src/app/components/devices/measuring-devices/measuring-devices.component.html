@@ -39,10 +39,14 @@
       </mat-menu>
     </div>
     <section class="header-datetime-filter">
-      <input type="datetime-local" name="initial-datetime" class="datetime-selector mat-elevation-z4"
-        [(ngModel)]="initialDateTime">
-      <input type="datetime-local" name="final-datetime" class="datetime-selector mat-elevation-z4"
-        [(ngModel)]="finalDateTime">
+      <div class="datetime-filter-inputs">
+        <input type="datetime-local" name="initial-datetime" class="datetime-selector mat-elevation-z4"
+          [(ngModel)]="initialDateTime">
+        <input type="datetime-local" name="final-datetime" class="datetime-selector mat-elevation-z4"
+          [(ngModel)]="finalDateTime">
+        <input type="number" name="measurement-limit" class="measurement-limit mat-elevation-z4"
+          [(ngModel)]="measurementLimit">
+      </div>
       <button mat-raised-button (click)="dateTimeFilter()"
         class="datetime-filter-button mat-elevation-z4"><mat-icon>filter_list</mat-icon>filtrar
       </button>
