@@ -1,6 +1,5 @@
 import { DiscreteDevice } from './../../../models/DiscreteDevice';
 import { DiscreteDeviceService } from 'src/app/services/discrete-device.service';
-import { AnalogOutputDevice } from 'src/app/models/AnalogOutputDevice';
 import { Injectable } from '@angular/core';
 import {
   Router, Resolve,

@@ -1,27 +1,25 @@
 # Myiot
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.3.
+Este projeto é um frontend desenvolvido em Angular com a finalidade de se comunicar com a API [https://github.com/DougFSilva/MyIOT-backend](https://github.com/DougFSilva/MyIOT-backend). A aplicação possibilita a criação de uma conta de usuário, que deve ser aprovada por outro usuário de perfil admin. Criada a conta o usuário pode cadastrar dispositivos para medição, sinais discretos e sinais analógicos. Os dispositivos de medição publicam os valores medidos em um tópico MQTT específico, então a API recebe o valor pelo Broker MQTT, persiste no banco de dados e envia o valor via websocket para o frontend. Os dispositivos discretos recebem um valor de true ou false possibilitando ligar ou desligar um motor por exemplo. E os dispositivos analógicos recebem um valor que varia entre 0 e 256, permitindo controlar por exemplo a intensidade de iluminação de uma lâmpada. Mais detalhes do funcionamento da API em si veja em [https://github.com/DougFSilva/MyIOT-backend](https://github.com/DougFSilva/MyIOT-backend).
 
-## Development server
+Exemplo de tela de um dispositivos de medição ![tela de dispositivo de medição](./src//assets/exemplo-tela-medicao.jpg)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Exemplo de tela de cadastro de um dispositivo de medição ![tela e cadastro de um dispositivo de medição](./src/assets/exemplo-tela-medicao-cadastro.jpg)
 
-## Code scaffolding
+Exemplo de tela de um dispositivo discreto ![tela de dispositivo discreto](./src/assets/exemplo-tela-discreto.jpg)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Exemplo de tela de um dispositivo analógico ![tela de dispositivo analógico](./src/assets/exemplo-tela-analogico.jpg)
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 🚀 Começando
+Para utilizar a aplicação em conjunto com a API de forma bem simples utilizando docker compose, siga as orientações em: [https://github.com/DougFSilva/MyIOT-backend](https://github.com/DougFSilva/MyIOT-backend). 
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🛠️Construído com
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+* Angular
+* Sockjs
+* Stompjs
+---
+## ✒️ Autor
+* Douglas Ferreira da Silva
