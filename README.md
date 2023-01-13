@@ -34,6 +34,9 @@ Para utilizar a aplicação em conjunto com a API de forma bem simples utilizand
 * Angular
 * Sockjs
 * Stompjs
+* html
+* css
+* docker
 ---
 ## ✒️ Autor
 * Douglas Ferreira da Silva
