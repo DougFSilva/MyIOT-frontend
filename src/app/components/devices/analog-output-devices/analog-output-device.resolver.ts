@@ -2,7 +2,6 @@ import { AnalogOutputDeviceService } from 'src/app/services/analog-output-device
 import { AnalogOutputDevice } from 'src/app/models/AnalogOutputDevice';
 import { Injectable } from '@angular/core';
 import {
-  Router,
   Resolve,
   RouterStateSnapshot,
   ActivatedRouteSnapshot,

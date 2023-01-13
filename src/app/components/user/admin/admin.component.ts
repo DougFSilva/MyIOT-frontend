@@ -1,11 +1,13 @@
-import { ConfirmDialogComponent } from './../../confirm-dialog/confirm-dialog.component';
+
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { UserAdminService } from './../../../services/user-admin.service';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { User } from 'src/app/models/User';
 import { FormControl } from '@angular/forms';
+
+import { ConfirmDialogComponent } from './../../confirm-dialog/confirm-dialog.component';
+import { UserAdminService } from './../../../services/user-admin.service';
 
 @Component({
   selector: 'app-admin',
@@ -61,7 +63,7 @@ export class AdminComponent implements OnInit {
     let dialog = this.dialog.open(ConfirmDialogComponent)
     dialog.afterClosed().subscribe(response => {
       if(response == "true"){
-        this.service.delete(id).subscribe(response => {
+        this.service.delete(id).subscribe(() => {
           this.toast.success("Usuário deletado com sucesso!", "SUCESSO")
           this.findUsers()
         }, (ex) => {
@@ -78,7 +80,7 @@ export class AdminComponent implements OnInit {
     let dialog = this.dialog.open(ConfirmDialogComponent)
     dialog.afterClosed().subscribe(response => {
       if(response == "true"){
-        this.service.update(user.id, this.form).subscribe(response => {
+        this.service.update(user.id, this.form).subscribe(() => {
           this.toast.success("Perfil atualizado com sucesso!", "SUCESSO")
           this.findUsers()
         }, (ex) => {
@@ -92,7 +94,7 @@ export class AdminComponent implements OnInit {
     let dialog = this.dialog.open(ConfirmDialogComponent)
     dialog.afterClosed().subscribe(response => {
       if(response == "true"){
-        this.service.approveRegistration(id, approved).subscribe(response => {
+        this.service.approveRegistration(id, approved).subscribe(() => {
           this.toast.success("Usuário aprovado com sucesso!", "SUCESSO")
           this.findUsers()
         }, (ex) => {

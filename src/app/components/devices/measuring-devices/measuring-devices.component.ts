@@ -1,10 +1,8 @@
 import {
-  Chart,
   ChartConfiguration,
   ChartDataset,
   ChartEvent,
   ChartType,
-  TimeScale,
 } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
@@ -210,7 +208,7 @@ export class MeasuringDevicesComponent implements OnInit {
     dialog.afterClosed().subscribe((response) => {
       if (response == 'true') {
         this.service.deleteByUser().subscribe(
-          (response) => {
+          () => {
             this.toast.success('Dispositivos deletados com sucesso!','SUCESSO');
             this.findDevices();
           },
@@ -228,7 +226,7 @@ export class MeasuringDevicesComponent implements OnInit {
     dialog.afterClosed().subscribe((response) => {
       if (response == 'true') {
         this.service.deleteById(id).subscribe(
-          (response) => {
+          () => {
             this.toast.success('Dispositivo deletado com sucesso!', 'SUCESSO');
             this.findDevices();
           },
@@ -243,7 +241,7 @@ export class MeasuringDevicesComponent implements OnInit {
 
   updateById(id: string): void {
     let dialog = this.dialog.open(UpdateMeasuringDeviceComponent, {data: { id },});
-    dialog.afterClosed().subscribe((response) => {
+    dialog.afterClosed().subscribe(() => {
       this.findDevices();
     });
   }

@@ -1,6 +1,3 @@
-import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
-
-import { UpdatePasswordComponent } from './update-password/update-password.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
@@ -8,6 +5,9 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
+
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 @Component({
   selector: 'app-user',
@@ -57,7 +57,7 @@ export class UserComponent implements OnInit {
     let dialog = this.dialog.open(ConfirmDialogComponent)
     dialog.afterClosed().subscribe(response => {
       if(response == "true"){
-        this.service.delete().subscribe(response => {
+        this.service.delete().subscribe(() => {
           this.toast.success("Conta deletada com sucesso, sentiremos sua falta!", "SUCESSO")
           this.authService.logout()
         }, (ex) => {

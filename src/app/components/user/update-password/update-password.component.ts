@@ -6,7 +6,6 @@ import { FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { UserUpdatePasswordForm } from 'src/app/models/UserUpdatePasswordForm';
 import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-update-password',
@@ -44,7 +43,7 @@ export class UpdatePasswordComponent implements OnInit {
     let dialog = this.dialog.open(ConfirmDialogComponent)
     dialog.afterClosed().subscribe(response => {
       if(response == "true"){
-        this.service.updatePassword(this.form).subscribe(response => {
+        this.service.updatePassword(this.form).subscribe(() => {
           this.toast.success("Password alterado com sucesso!", "SUCESSO")
           this.dialog.closeAll()
         }, (ex) => {

@@ -1,4 +1,3 @@
-import { CreateDiscreteDeviceComponent } from './create-discrete-device/create-discrete-device.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -6,6 +5,7 @@ import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 import { ActivatedRoute } from '@angular/router';
 
+import { CreateDiscreteDeviceComponent } from './create-discrete-device/create-discrete-device.component';
 import { DiscreteDeviceService } from 'src/app/services/discrete-device.service';
 import { DiscreteDevice } from 'src/app/models/DiscreteDevice';
 import { API_CONFIG } from 'src/app/config/API_CONFIG';
@@ -115,7 +115,7 @@ export class DiscreteDevicesComponent implements OnInit, OnDestroy {
      dialog.afterClosed().subscribe((response) => {
        if (response == 'true') {
          this.service.deleteById(id).subscribe(
-           (response) => {
+           () => {
              this.toast.success('Dispositivo deletado com sucesso!','SUCESSO');
              this.findDevices()
            },
@@ -140,7 +140,7 @@ export class DiscreteDevicesComponent implements OnInit, OnDestroy {
 
    updateStatus(id: string, status: boolean): void {
      this.service.publishStatusOnBrokerMqtt(id, status).subscribe(
-       (response) => {
+       () => {
          this.toast.success('Comando publicado com sucesso!', 'SUCESSO');
        },
        (ex) => {

@@ -111,7 +111,7 @@ export class AnalogOutputDevicesComponent implements OnInit, OnDestroy {
     dialog.afterClosed().subscribe((response) => {
       if (response == 'true') {
         this.service.deleteByUser().subscribe(
-          (response) => {
+          () => {
             this.toast.success('Dispositivos deletados com sucesso!','SUCESSO');
             this.findDevices()
           },
@@ -129,7 +129,7 @@ export class AnalogOutputDevicesComponent implements OnInit, OnDestroy {
     dialog.afterClosed().subscribe((response) => {
       if (response == 'true') {
         this.service.deleteById(id).subscribe(
-          (response) => {
+          () => {
             this.toast.success('Dispositivo deletado com sucesso!','SUCESSO');
             this.findDevices()
           },

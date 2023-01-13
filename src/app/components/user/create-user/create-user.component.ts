@@ -37,7 +37,7 @@ export class CreateUserComponent implements OnInit {
 
   create():void {
     console.log(this.form)
-    this.service.create(this.form).subscribe(response => {
+    this.service.create(this.form).subscribe(() => {
       this.toast.success("Usuário criado com sucesso!", "SUCESSO")
       this.router.navigate(["login"])
     }, (ex) => {

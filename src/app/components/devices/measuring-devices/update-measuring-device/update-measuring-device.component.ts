@@ -1,10 +1,12 @@
-import { ConfirmDialogComponent } from './../../../confirm-dialog/confirm-dialog.component';
+
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+
 import { MeasuringDevice } from 'src/app/models/MeasuringDevice';
 import { MeasuringDeviceService } from 'src/app/services/measuring-device.service';
+import { ConfirmDialogComponent } from './../../../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-update-measuring-device',

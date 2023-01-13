@@ -1,10 +1,10 @@
-import { API_CONFIG } from './../../../../../../websocket_test/src/app/components/config/api.config';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+
 import { LoginForm } from 'src/app/models/LoginForm';
 import { AuthService } from 'src/app/services/auth.service';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-login',

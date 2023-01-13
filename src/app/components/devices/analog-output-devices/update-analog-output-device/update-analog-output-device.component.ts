@@ -1,10 +1,12 @@
-import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
+
 import { FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+
 import { AnalogOutputDeviceService } from 'src/app/services/analog-output-device.service';
 import { AnalogOutputDevice } from 'src/app/models/AnalogOutputDevice';
-import { Component, Inject, OnInit } from '@angular/core';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-update-analog-output-device',
