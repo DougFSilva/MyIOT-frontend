@@ -24,6 +24,11 @@ Exemplo de tela de um dispositivo discreto ![tela de dispositivo discreto](./src
 
 Exemplo de tela de um dispositivo analógico ![tela de dispositivo analógico](./src/assets/exemplo-tela-analogico.jpg)
 
+![tela de dispositivo analógico](./myiot.mp4)
+
+<video src="./myiot.mp4" controls="controls" style="max-width: 730px;">
+</video>
+
 
 ## 🚀 Começando
 Para utilizar a aplicação em conjunto com a API de forma bem simples utilizando docker compose, siga as orientações em: [https://github.com/DougFSilva/MyIOT-backend](https://github.com/DougFSilva/MyIOT-backend). Nesse repositório já tem um build desse frontend.
