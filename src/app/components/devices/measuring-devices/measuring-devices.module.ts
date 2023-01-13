@@ -1,3 +1,4 @@
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -55,5 +56,6 @@ import { MeasuringDevicesComponent } from './measuring-devices.component';
     CreateMeasuringDeviceComponent,
     UpdateMeasuringDeviceComponent,
   ],
+  providers: [MatDatepickerModule]
 })
 export class MeasuringDevicesModule {}
